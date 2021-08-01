@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BsFillCaretUpFill} from "react-icons/bs";
 import './App.css'
 
 // function Post(props) {
-//     let {questionId , incrementVote} = props
+//     let [count, incrementVote] = useState(props.vote)
+//     let {votes, questionId, updateVotes} = props; 
+//     useEffect(() => {
+//         incrementVote(votes);
+//     }, [votes])
 //     return (
 //         <div className="post">
-//             <p>{props.text}</p>
-//             <p>{props.poster}</p>
-//             <BsFillCaretUpFill onClick={() => incrementVote(questionId)}/><p>{props.votes}</p>
+//             <BsFillCaretUpFill onClick={() => incrementVote(count + 1), () => updateVotes(questionId, votes)}/><p>{count}</p>
 //         </div>
 //       );
 //     }

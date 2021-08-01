@@ -2,6 +2,18 @@ import React from 'react';
 import Post from './Post'
 import Trending from './Trending'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+
+const finalSpaceCharacters = [
+    {
+      id: 'gary',
+      name: 'Gary Goodspeed',
+    },
+    {
+        id: 'oldy',
+        name: 'Olody Poop',
+      }
+]
 
 export default class Home extends React.Component {
 
@@ -20,7 +32,6 @@ export default class Home extends React.Component {
             inputData: this.props.getTableData()
         }, () => {
             this.sortAscending("votes")
-            this.sortAscending("timePosted")
         })
     }
 
@@ -55,6 +66,21 @@ export default class Home extends React.Component {
         }
 
     }
+    
+
+    // updateVotes = (questionId, newVoteCount) => {
+    //     let inputData = [].concat(this.state.inputData);
+    //     inputData.map(function(question){
+    //         if (question['questionId'] ==  questionId){
+    //             question['votes'] = newVoteCount
+    //         }
+    //     console.log('new data')
+    //     console.log(inputData)
+    //     // this.setState({
+    //     //     inputData: inputData
+    //     // })
+    //     })
+    // }
 
     incrementVote(postId){
         let inputData = this.state.inputData.map((post) => {
@@ -74,9 +100,8 @@ export default class Home extends React.Component {
             <div>
                 <button onClick={() => {this.sortByAttribute('votes')}}> Sort Votes</button>
                 <button onClick={() => {this.sortByAttribute('timePosted')}}> Sort By Date</button>
-                {/* < Trending /> */}
-
-                {this.state.inputData.map((item, index) => <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)}/>)}
+                {/* {this.state.inputData.map((item, index) => <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)}/>)} */}
+                {/* {this.state.inputData.map((item, index) => <Post votes={item.votes} questionId={item.questionId} key={item.id} updateVotes={this.updateVotes.bind(this)}/>)} */}
             </div>
         )
     }
