@@ -1,13 +1,12 @@
 import React from 'react';
 import Home from './Home.js'
-import Trending from './Trending.js'
+import AdminBoard from './Admin.js'
 import {getTableData} from './api';
 
 function App() {
   return (
     <div>
-      <Home getTableData={getTableData}></Home>
-      <Trending getTableData={getTableData}></Trending>
+      <AdminBoard getTableData={getTableData}></AdminBoard>
     </div>
   );
 }

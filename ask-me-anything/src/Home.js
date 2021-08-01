@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from './Post'
-import Trending from './Trending'
+import Trending from './Admin'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
