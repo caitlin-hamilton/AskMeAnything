@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable} from 'react-beautiful-dnd';
-import AdminQuestion from './AdminQuestion'
+import AdminQuestion from './AdminQuestion';
 
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -81,6 +81,9 @@ export default class AdminBoard extends Component {
 
             if (source.droppableId === 'droppable2') {
                 state = { selected: items };
+            }
+            else if (source.droppableId == "droppable"){
+                state = {inputData: items}
             }
 
             this.setState(state);

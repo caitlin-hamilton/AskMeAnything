@@ -4,20 +4,26 @@
         "text" : "Why is the sky blue?",
         "poster" : "Jamie Dimon",
         "votes" : 5,
-        "timePosted": "1234"
+        "timePosted": "20012021",
+        "theme": "",
+        "answer": ""
     },
     {
         "id": "2",
         "text" : "What is the meaning of life?",
         "poster" : "Anonymous",
         "votes" : 0,
-        "timePosted": "5643"
+        "timePosted": "22012021",
+        "theme": "",
+        "answer": ""
     },
     {
         "id": "3",
         "text" : "Can I get a pay rise?",
         "poster" : "Anonymous",
         "votes" : 200,
-        "timePosted": "9898"
+        "timePosted": "20012026",
+        "theme": "",
+        "answer": ""
     }
 ]
