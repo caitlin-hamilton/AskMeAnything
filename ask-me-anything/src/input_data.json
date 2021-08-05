@@ -1,7 +1,7 @@
 [
     {
         "id": "1",
-        "text" : "Why is the sky blue?",
+        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
         "poster" : "Jamie Dimon",
         "votes" : 5,
         "timePosted": "20012021",
@@ -10,7 +10,7 @@
     },
     {
         "id": "2",
-        "text" : "What is the meaning of life?",
+        "text" : "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eount.",
         "poster" : "Anonymous",
         "votes" : 0,
         "timePosted": "22012021",
@@ -19,6 +19,33 @@
     },
     {
         "id": "3",
+        "text" : "Can I get a pay rise?",
+        "poster" : "Anonymous",
+        "votes" : 200,
+        "timePosted": "20012026",
+        "theme": "",
+        "answer": ""
+    },
+    {
+        "id": "4",
+        "text" : "Why is the sky blue?",
+        "poster" : "Jamie Dimon",
+        "votes" : 5,
+        "timePosted": "20012021",
+        "theme": "",
+        "answer": ""
+    },
+    {
+        "id": "5",
+        "text" : "What is the meaning of life?",
+        "poster" : "Anonymous",
+        "votes" : 0,
+        "timePosted": "22012021",
+        "theme": "",
+        "answer": ""
+    },
+    {
+        "id": "6",
         "text" : "Can I get a pay rise?",
         "poster" : "Anonymous",
         "votes" : 200,

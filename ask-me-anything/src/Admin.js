@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DragDropContext, Droppable} from 'react-beautiful-dnd';
 import AdminQuestion from './AdminQuestion';
+import Button from '@material-ui/core/Button';
 
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -29,7 +30,8 @@ const grid = 8;
 const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? 'lightblue' : 'lightgrey',
     padding: grid,
-    width: 250
+    width: "100%",
+    height:"100%"
 });
 
 export default class AdminBoard extends Component {
@@ -136,12 +138,11 @@ export default class AdminBoard extends Component {
 
     render() {
         return (
-            <div>
-                <DragDropContext onDragEnd={this.onDragEnd} class="container">
+                <DragDropContext onDragEnd={this.onDragEnd}>
                     <div className="one">
                     <h1>All Questions</h1>
-                    <button onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</button>
-                    <button onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</button>
+                    <Button onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
+                    <Button onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</Button>
                     <Droppable droppableId="droppable">
                         {(provided, snapshot) => (
                             <div
@@ -157,8 +158,7 @@ export default class AdminBoard extends Component {
                     </div>
                     <div className="two">
                     <h1>Sorted Questions</h1>
-                    <button onClick={() => {this.sortByAttribute('selected', 'votes')}}>Sort By Votes</button>
-                    <button onClick={() => {this.sortByAttribute('selected', 'timePosted')}}>Sort By Date</button>
+                    <Button>Export To Meeting</Button>
                     <Droppable droppableId="droppable2">
                         {(provided, snapshot) => (
                             <div
@@ -173,7 +173,6 @@ export default class AdminBoard extends Component {
                     </Droppable>
                     </div>
                 </DragDropContext>
-            </div>
         );
     }
 }

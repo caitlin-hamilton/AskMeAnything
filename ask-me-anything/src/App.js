@@ -6,6 +6,7 @@ import {getTableData} from './api';
 function App() {
   return (
     <div>
+      {/* <Home getTableData={getTableData}></Home> */}
       <AdminBoard getTableData={getTableData}></AdminBoard>
     </div>
   );
