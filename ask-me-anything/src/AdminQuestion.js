@@ -34,8 +34,8 @@ function AdminQuestion(props){
                         snapshot.isDragging,
                         provided.draggableProps.style
                       )}>
-                        <Button className="editButton">{<GoKebabHorizontal/>}</Button>
                         <p className="question">{props.text}</p>
+                        <Button className="editButton">{<GoKebabHorizontal/>}</Button>
                         <h5 className="textStyle">Votes: {props.votes} </h5>
                         <Dropdown onSelect={function(evt){setTheme(selectedTheme = evt)}} className="dropdown">
                             <Dropdown.Toggle variant="success" id="dropdown-basic">

@@ -2,21 +2,6 @@
   display: flex;
   width:100%
 }
-
-.post{
-  padding-top: 50px;
-  padding-bottom: 50px;
-  width: 100%;
-  height: auto;
-  margin: auto;
-  padding: 10px;
-  background: darkgrey;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  word-wrap:break-word;
-  display: flex;
-  flex-direction:column;
-}
 .buttonContainer {
   display:flex;
   width:100%;
@@ -51,21 +36,34 @@ button:last-of-type {
   float: right;
 }
 
+.post{
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 100%;
+  height: auto;
+  margin: auto;
+  padding: 10px;
+  background: darkgrey;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-wrap:break-word;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .question {
-  flex-grow: 2;
-  width:100%
+  flex: 80%
 }
 
 .editButton {
   padding:0;
-  flex-grow:1
+  height:10%;
+  flex: 10%;
 }
 .textStyle {
-  width: 49%;
-  flex-grow:1
+  flex: 70%;
 }
 
 .dropdown {
-  width:49%;
-  flex-grow:1
+  flex: 20%;
 }
