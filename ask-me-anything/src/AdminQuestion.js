@@ -22,7 +22,6 @@ function AdminQuestion(props){
     let [selectedTheme, setTheme] = useState('Select Theme')
     return (
         <Draggable
-        onClick={()=> console.log('Hellloooooo')}
             key={props.dragId}
             draggableId={props.dragId}
             index={props.index}>
@@ -35,18 +34,17 @@ function AdminQuestion(props){
                         snapshot.isDragging,
                         provided.draggableProps.style
                       )}>
-                        <Button className="editButton" onClick={()=> console.log('I am button')}>{<GoKebabHorizontal/>}</Button>
-                    <p>{props.text}</p>
-                    <h5 className="textStyle">Votes: {props.votes} </h5>
-                    <h5 className="textStyle">    Time Posted: {props.timePosted}</h5>
-                    <Dropdown onSelect={function(evt){setTheme(selectedTheme = evt)}} className="dropdown">
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            {selectedTheme}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {themes.map((item) => <Dropdown.Item eventKey={item}>{item}</Dropdown.Item>)}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                        <Button className="editButton">{<GoKebabHorizontal/>}</Button>
+                        <p className="question">{props.text}</p>
+                        <h5 className="textStyle">Votes: {props.votes} </h5>
+                        <Dropdown onSelect={function(evt){setTheme(selectedTheme = evt)}} className="dropdown">
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                {selectedTheme}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {themes.map((item) => <Dropdown.Item eventKey={item}>{item}</Dropdown.Item>)}
+                            </Dropdown.Menu>
+                        </Dropdown>
                 </div>
             )}
         </Draggable>

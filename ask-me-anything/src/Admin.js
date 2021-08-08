@@ -138,11 +138,15 @@ export default class AdminBoard extends Component {
 
     render() {
         return (
+            <div className="questionList">
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <div className="one">
                     <h1>All Questions</h1>
-                    <Button onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
-                    <Button onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</Button>
+                    <div className="buttonContainer">
+                    <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
+                    <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</Button>
+                    <Button className="button">Add theme</Button>
+                    </div>
                     <Droppable droppableId="droppable">
                         {(provided, snapshot) => (
                             <div
@@ -157,8 +161,10 @@ export default class AdminBoard extends Component {
                     </Droppable>
                     </div>
                     <div className="two">
-                    <h1>Sorted Questions</h1>
-                    <Button>Export To Meeting</Button>
+                            <h1>Sorted Questions</h1>
+                    <div className="buttonContainer">
+                        <Button className="button">Save Order</Button>
+                    </div>
                     <Droppable droppableId="droppable2">
                         {(provided, snapshot) => (
                             <div
@@ -173,6 +179,7 @@ export default class AdminBoard extends Component {
                     </Droppable>
                     </div>
                 </DragDropContext>
+            </div>
         );
     }
 }
