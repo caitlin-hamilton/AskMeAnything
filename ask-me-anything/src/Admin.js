@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { DragDropContext, Droppable} from 'react-beautiful-dnd';
 import AdminQuestion from './AdminQuestion';
 import Button from '@material-ui/core/Button';
+import ThemeModal from './ThemeModal';
 
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -28,7 +29,7 @@ const move = (source, destination, droppableSource, droppableDestination) => {
 const grid = 8;
 
 const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
+    background: isDraggingOver ? 'lightblue' : 'darkgrey',
     padding: grid,
     width: "100%",
     height:"100%"
@@ -40,6 +41,7 @@ export default class AdminBoard extends Component {
         this.state = {
             inputData: [],
             selected: [],
+            isModalOpen: false,
             sortLogic : {
                 "inputData" : {
                     votes: "asc",
@@ -55,6 +57,12 @@ export default class AdminBoard extends Component {
     componentDidMount(){
         this.setState({
             inputData: this.props.getTableData()
+        })
+    }
+
+    switchModal() {
+        this.setState({
+            isModalOpen: ! this.state.isModalOpen
         })
     }
 
@@ -83,12 +91,16 @@ export default class AdminBoard extends Component {
 
             if (source.droppableId === 'droppable2') {
                 state = { selected: items };
+                this.setState({
+                    selected:items
+                })
             }
             else if (source.droppableId == "droppable"){
                 state = {inputData: items}
+                this.setState({
+                    inputData:items
+                })
             }
-
-            this.setState(state);
         } else {
             const result = move(
                 this.getList(source.droppableId),
@@ -136,6 +148,25 @@ export default class AdminBoard extends Component {
 
     }
 
+    updateThemeForInput(questionList, newTheme, questionId){
+        let data = [...this.state[questionList]]
+        for(let i=0; i< data.length; i ++){
+            let item = data[i]
+            if(questionId == item["id"]){
+                item["theme"] = newTheme
+                data[i] = item
+                this.setState({
+                    [questionList]: data
+                })
+            }
+        }
+    }
+
+    updateTheme = (newTheme, questionId) => {
+        this.updateThemeForInput('inputData', newTheme, questionId)
+        this.updateThemeForInput('selected', newTheme, questionId)
+    }
+
     render() {
         return (
             <div className="questionList">
@@ -143,9 +174,10 @@ export default class AdminBoard extends Component {
                     <div className="one">
                     <h1>All Questions</h1>
                     <div className="buttonContainer">
-                    <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
-                    <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</Button>
-                    <Button className="button">Add theme</Button>
+                        <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
+                        <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</Button>
+                        <Button className="button" onClick={() => this.switchModal()}>Edit Themes</Button>
+                        <ThemeModal isModalOpen={this.state.isModalOpen} switchModal={() => this.switchModal()}/>
                     </div>
                     <Droppable droppableId="droppable">
                         {(provided, snapshot) => (
@@ -153,7 +185,7 @@ export default class AdminBoard extends Component {
                                 ref={provided.innerRef}
                                 style={getListStyle(snapshot.isDraggingOver)}>
                                 {this.state.inputData.map((item, index) => (
-                                    <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes}/>
+                                    <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme}/>
                                 ))}
                                 {provided.placeholder}
                             </div>
@@ -171,7 +203,7 @@ export default class AdminBoard extends Component {
                                 ref={provided.innerRef}
                                 style={getListStyle(snapshot.isDraggingOver)}>
                                 {this.state.selected.map((item, index) => (
-                                    <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes}/>
+                                    <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme}/>
                                 ))}
                                 {provided.placeholder}
                             </div>

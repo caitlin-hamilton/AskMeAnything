@@ -1,1 +1,1 @@
-export const themes = ['RTTO', 'Compensation', 'Salt']
+export var themes = ['RTTO', 'Compensation', 'Eco']

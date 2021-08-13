@@ -43,12 +43,13 @@ button:last-of-type {
   height: auto;
   margin: auto;
   padding: 10px;
-  background: darkgrey;
+  background: lightgray;
   text-overflow: ellipsis;
   overflow: hidden;
   word-wrap:break-word;
   display: flex;
   flex-wrap: wrap;
+  overflow:visible;
 }
 
 .question {
@@ -66,4 +67,12 @@ button:last-of-type {
 
 .dropdown {
   flex: 10%;
+  overflow:visible;
+  width:150px;
+}
+
+.ModalCancel {
+  width:10px;
+  float: right;
+  text-align: right;
 }

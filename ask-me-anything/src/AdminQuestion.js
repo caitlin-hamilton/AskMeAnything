@@ -12,14 +12,31 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     userSelect: "none",
     padding: grid * 2,
     margin: `0 0 ${grid}px 0`,
-    background: isDragging ? "lightgreen" : "grey",
+    background: isDragging ? "lightgreen" : "lightgrey",
     ...draggableStyle
   });
 
 function AdminQuestion(props){
+    var questionTheme
+
+    function setDefaultTheme(){
+        if(props.theme === ""){
+            questionTheme = 'Select Theme'
+        }
+        else {
+            questionTheme = props.theme
+        }
+        return questionTheme
+    }
     let provided = props.provided;
     let snapshot = props.snapshot;
-    let [selectedTheme, setTheme] = useState('Select Theme')
+
+    function updateTheme(evt){
+        questionTheme = evt
+        console.log(questionTheme)
+        console.log(props.updateTheme)
+        props.updateTheme(questionTheme, props.dragId)
+    }
     return (
         <Draggable
             key={props.dragId}
@@ -37,9 +54,9 @@ function AdminQuestion(props){
                         <p className="question">{props.text}</p>
                         <Button className="editButton">{<GoKebabHorizontal/>}</Button>
                         <h5 className="textStyle">Votes: {props.votes} </h5>
-                        <Dropdown onSelect={function(evt){setTheme(selectedTheme = evt)}} className="dropdown">
-                            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                {selectedTheme}
+                        <Dropdown onSelect={updateTheme} className="dropdown">
+                            <Dropdown.Toggle variant="success" id="dropdown-basic" className="dropdown">
+                                {setDefaultTheme()}
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                                 {themes.map((item) => <Dropdown.Item eventKey={item}>{item}</Dropdown.Item>)}
