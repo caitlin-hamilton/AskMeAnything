@@ -10,12 +10,15 @@
 
 .button{
   height: 10%;
-  width: 15%;
-  padding:0;
+  width: auto;
 }
 
 button:last-of-type {
   margin-left: auto;
+}
+
+button:nth-of-type(3) {
+  margin-left: 29%;
 }
 
 .container {
@@ -27,13 +30,14 @@ button:last-of-type {
 .one {
   width: 50%;
   height: 100%;
-  float: left;
+  display: flex;
+
 }
 
 .two {
   width: 50%;
   height: 100%;
-  float: right;
+  display: flex;
 }
 
 .post{

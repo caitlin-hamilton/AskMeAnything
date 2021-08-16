@@ -169,48 +169,52 @@ export default class AdminBoard extends Component {
 
     render() {
         return (
-            <div className="questionList">
-                <DragDropContext onDragEnd={this.onDragEnd}>
-                    <div className="one">
-                    <h1>All Questions</h1>
-                    <div className="buttonContainer">
+            <div>
+                <div className="questionList">
+                    <h1 className="one">All Questions</h1>
+                    <h1 className="two">Sorted Questions</h1>
+                </div>
+                <div className="buttonContainer">
                         <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
                         <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</Button>
                         <Button className="button" onClick={() => this.switchModal()}>Edit Themes</Button>
                         <ThemeModal isModalOpen={this.state.isModalOpen} switchModal={() => this.switchModal()}/>
-                    </div>
-                    <Droppable droppableId="droppable">
-                        {(provided, snapshot) => (
-                            <div
-                                ref={provided.innerRef}
-                                style={getListStyle(snapshot.isDraggingOver)}>
-                                {this.state.inputData.map((item, index) => (
-                                    <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme}/>
-                                ))}
-                                {provided.placeholder}
-                            </div>
-                        )}
-                    </Droppable>
-                    </div>
-                    <div className="two">
-                            <h1>Sorted Questions</h1>
-                    <div className="buttonContainer">
                         <Button className="button">Save Order</Button>
                     </div>
-                    <Droppable droppableId="droppable2">
-                        {(provided, snapshot) => (
-                            <div
-                                ref={provided.innerRef}
-                                style={getListStyle(snapshot.isDraggingOver)}>
-                                {this.state.selected.map((item, index) => (
-                                    <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme}/>
-                                ))}
-                                {provided.placeholder}
+                <div>
+                    <div className="questionList">
+                        <DragDropContext onDragEnd={this.onDragEnd}>
+                            <div className="one">
+                            <Droppable droppableId="droppable">
+                                {(provided, snapshot) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        style={getListStyle(snapshot.isDraggingOver)}>
+                                        {this.state.inputData.map((item, index) => (
+                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme}/>
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
                             </div>
-                        )}
-                    </Droppable>
+                            <div className="two">
+                            <Droppable droppableId="droppable2">
+                                {(provided, snapshot) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        style={getListStyle(snapshot.isDraggingOver)}>
+                                        {this.state.selected.map((item, index) => (
+                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme}/>
+                                        ))}
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                            </div>
+                        </DragDropContext>
                     </div>
-                </DragDropContext>
+                </div>
             </div>
         );
     }
