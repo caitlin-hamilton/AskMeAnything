@@ -1,1 +1,2 @@
-export var themes = ['RTTO', 'Compensation', 'Eco']
+const themes = ['RTTO', 'Compensation', 'Eco']
+export default themes;

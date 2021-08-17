@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { GoKebabHorizontal } from "react-icons/go";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dropdown from 'react-bootstrap/Dropdown'
-import {themes} from './Themes'
+import themes from './Themes'
 import Button from '@material-ui/core/Button';
 
 const grid = 8;

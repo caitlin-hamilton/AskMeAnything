@@ -1,6 +1,8 @@
 import React, {useState}  from 'react';
-import themes from './themes.json'
+import themes from './Themes'
 import { Modal } from 'react-bootstrap';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from '@material-ui/core/Button';
 
 
 const customStyles = {
@@ -34,11 +36,21 @@ export default function ThemeModal(props) {
               <Modal.Title>Edit Themes</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h3>Add a New Theme</h3>
             <form onSubmit={submit}>
-                <input onChange={updateThemeForm}/>
+                <input onChange={updateThemeForm} placeholder='Add new theme'/>
                 <input type="submit" value="Submit"/>
             </form>
+            <div style={{height:'25px'}}></div>
+            <div className="buttonContainerDelete">
+            {themes.map((item) => (
+                <Button
+                    variant="contained"
+                    startIcon={<DeleteIcon />}
+                    >
+                {item}
+                </Button>
+                ))}
+            </div>
           </Modal.Body>
         </Modal>
     );

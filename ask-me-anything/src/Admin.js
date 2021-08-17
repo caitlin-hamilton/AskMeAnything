@@ -175,11 +175,11 @@ export default class AdminBoard extends Component {
                     <h1 className="two">Sorted Questions</h1>
                 </div>
                 <div className="buttonContainer">
-                        <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
-                        <Button className="button" onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</Button>
-                        <Button className="button" onClick={() => this.switchModal()}>Edit Themes</Button>
+                        <Button className="adminButton" onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
+                        <Button className="adminButton" onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</Button>
+                        <Button className="adminButton" onClick={() => this.switchModal()}>Edit Themes</Button>
                         <ThemeModal isModalOpen={this.state.isModalOpen} switchModal={() => this.switchModal()}/>
-                        <Button className="button">Save Order</Button>
+                        <Button className="adminButton">Save Order</Button>
                     </div>
                 <div>
                     <div className="questionList">

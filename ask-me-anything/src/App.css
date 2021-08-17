@@ -8,16 +8,27 @@
   height:10%;
 }
 
-.button{
+input[type=submit] {padding:5px 15px; background:#ccc; border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
+
+.buttonContainerDelete {
+  width:100%;
+  display:flex;
+  flex-wrap: wrap;
+}
+
+button.adminButton {
   height: 10%;
   width: auto;
 }
 
-button:last-of-type {
+button:last-of-type.adminButton {
   margin-left: auto;
 }
 
-button:nth-of-type(3) {
+button:nth-of-type(3).adminButton {
   margin-left: 29%;
 }
 
