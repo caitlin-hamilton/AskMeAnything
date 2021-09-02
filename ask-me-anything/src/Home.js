@@ -76,7 +76,7 @@ export default class Home extends React.Component {
                 <Button className="adminButton" onClick={() => {this.sortByAttribute('votes')}}> Sort By Votes</Button>
                 <Button className="adminButton" onClick={() => {this.sortByAttribute('timePosted')}}> Sort By Date</Button>
                 <div className="postContainer">
-                    {this.state.inputData.map((item, index) => <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)}/>)}
+                    {this.state.inputData.map((item, index) => <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)} answer={item.answer}/>)}
                 </div>
             </div>
         )
