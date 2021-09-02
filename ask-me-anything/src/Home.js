@@ -3,17 +3,7 @@ import Post from './Post'
 import Trending from './Admin'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-
-const finalSpaceCharacters = [
-    {
-      id: 'gary',
-      name: 'Gary Goodspeed',
-    },
-    {
-        id: 'oldy',
-        name: 'Olody Poop',
-      }
-]
+import Button from '@material-ui/core/Button';
 
 export default class Home extends React.Component {
 
@@ -66,21 +56,6 @@ export default class Home extends React.Component {
         }
 
     }
-    
-
-    // updateVotes = (questionId, newVoteCount) => {
-    //     let inputData = [].concat(this.state.inputData);
-    //     inputData.map(function(question){
-    //         if (question['questionId'] ==  questionId){
-    //             question['votes'] = newVoteCount
-    //         }
-    //     console.log('new data')
-    //     console.log(inputData)
-    //     // this.setState({
-    //     //     inputData: inputData
-    //     // })
-    //     })
-    // }
 
     incrementVote(postId){
         let inputData = this.state.inputData.map((post) => {
@@ -97,11 +72,12 @@ export default class Home extends React.Component {
     render(){
 
         return(
-            <div>
-                <button onClick={() => {this.sortByAttribute('votes')}}> Sort Votes</button>
-                <button onClick={() => {this.sortByAttribute('timePosted')}}> Sort By Date</button>
-                {/* {this.state.inputData.map((item, index) => <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)}/>)} */}
-                {/* {this.state.inputData.map((item, index) => <Post votes={item.votes} questionId={item.questionId} key={item.id} updateVotes={this.updateVotes.bind(this)}/>)} */}
+            <div className="container">
+                <Button className="adminButton" onClick={() => {this.sortByAttribute('votes')}}> Sort By Votes</Button>
+                <Button className="adminButton" onClick={() => {this.sortByAttribute('timePosted')}}> Sort By Date</Button>
+                <div className="postContainer">
+                    {this.state.inputData.map((item, index) => <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)}/>)}
+                </div>
             </div>
         )
     }

@@ -43,7 +43,7 @@ function AdminQuestion(props){
             draggableId={props.dragId}
             index={props.index}>
             {(provided, snapshot) => (
-                <div className="post"
+                <div className="adminPost"
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
