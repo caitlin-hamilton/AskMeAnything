@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component} from 'react';
 import { DragDropContext, Droppable} from 'react-beautiful-dnd';
 import AdminQuestion from './AdminQuestion';
 import Button from '@material-ui/core/Button';
@@ -87,16 +87,12 @@ export default class AdminBoard extends Component {
                 destination.index
             );
 
-            let state = { items };
-
             if (source.droppableId === 'droppable2') {
-                state = { selected: items };
                 this.setState({
                     selected:items
                 })
             }
-            else if (source.droppableId == "droppable"){
-                state = {inputData: items}
+            else if (source.droppableId==="droppable"){
                 this.setState({
                     inputData:items
                 })
@@ -138,10 +134,10 @@ export default class AdminBoard extends Component {
     }
 
     sortByAttribute(questionList, attribute){
-        if ( !this.state.sortLogic[questionList][attribute] || this.state.sortLogic[questionList][attribute] == "desc") {
+        if ( !this.state.sortLogic[questionList][attribute] || this.state.sortLogic[questionList][attribute] === "desc") {
             this.sortAscending(questionList,attribute)
         }
-        else if (this.state.sortLogic[questionList][attribute] == "asc") {
+        else if (this.state.sortLogic[questionList][attribute]==="asc") {
             this.sortDescending(questionList, attribute)
             
         }
@@ -152,7 +148,7 @@ export default class AdminBoard extends Component {
         let data = [...this.state[questionList]]
         for(let i=0; i< data.length; i ++){
             let item = data[i]
-            if(questionId == item["id"]){
+            if(questionId === item["id"]){
                 item["theme"] = newTheme
                 data[i] = item
                 this.setState({

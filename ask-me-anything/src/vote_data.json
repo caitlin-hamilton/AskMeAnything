@@ -1,0 +1,27 @@
+[
+    {
+        "id": "acbde",
+        "votes": [
+            {
+                "id" : "3",
+                "answerUp": true,
+                "answerDown": false
+            },
+            {
+                "id" : "1",
+                "answerUp": true,
+                "answerDown": false
+            }
+        ]
+    },
+    {
+        "id": "xyz123",
+        "votes": [
+            {
+                "id" : "1",
+                "answerUp": true,
+                "answerDown": false
+            }
+        ]
+    }
+]

@@ -4,20 +4,6 @@ import { Modal } from 'react-bootstrap';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
 
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    display: 'grid',
-  },
-};
-
-
 export default function ThemeModal(props) {
     const [theme, updateTheme] = useState("");
 

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BsFillCaretUpFill} from "react-icons/bs";
-import { FaThumbsUp } from "react-icons/fa";
+import { FaThumbsUp, FaRegThumbsUp} from "react-icons/fa";
 import {ImReply} from "react-icons/im";
 import './App.css'
 
@@ -14,7 +13,8 @@ class Post extends React.Component {
             hasAnswer: false,
             poster : "",
             votes: "",
-            id: ""
+            id: "",
+            hasUserVoted: false,
         }
 
     }
@@ -22,25 +22,45 @@ class Post extends React.Component {
         this.setState({
             text: this.props.text,
             answer : this.props.answer,
-            hasAnswer: this.props.answer == "" ? false : true,
+            hasAnswer: this.props.answer === "" ? false : true,
             poster : this.props.poster,
             votes: this.props.votes,
-            id: this.props.id
+            id: this.props.id,
+            hasUserVoted: this.props.hasUserVoted
         })
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.votes !== this.props.votes) {
+            this.setState({
+                votes: this.props.votes
+            })
+
+        }
+    }
+
     renderAnswer(){
-        return
+
     }
 
     renderReply(){
         if (this.state.hasAnswer){
             return (
             <div>
-                <ImReply onClick="renderAnswer()"/>
+                <ImReply onClick={() => this.renderAnswer()}/>
                 <p>{this.state.answer}</p>
             </div>
             )
+        }
+    }
+    
+    renderUpVoteButton() {
+        if (this.props.hasUserVoted === true){
+            return <FaThumbsUp onClick={() => this.props.decrementVote(this.props.id)}/>
+        }
+        else
+        {
+            return <FaRegThumbsUp onClick={() => this.props.incrementVote(this.props.id)}/>
         }
     }
     render(){
@@ -50,7 +70,7 @@ class Post extends React.Component {
             <p className="askedBy">Asked By: {this.state.poster}</p>
             <div className="likeContainer">
                 <p className="voteP">{this.state.votes}</p>
-                <FaThumbsUp onClick={() => this.state.incrementVote(this.state.id)}/>
+                {this.renderUpVoteButton()}
             </div>
             {this.renderReply()}
         </div>

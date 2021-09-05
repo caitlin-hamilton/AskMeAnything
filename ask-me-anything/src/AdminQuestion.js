@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { GoKebabHorizontal } from "react-icons/go";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,13 +28,9 @@ function AdminQuestion(props){
         }
         return questionTheme
     }
-    let provided = props.provided;
-    let snapshot = props.snapshot;
 
     function updateTheme(evt){
         questionTheme = evt
-        console.log(questionTheme)
-        console.log(props.updateTheme)
         props.updateTheme(questionTheme, props.dragId)
     }
     return (

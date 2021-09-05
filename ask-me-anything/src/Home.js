@@ -1,8 +1,6 @@
 import React from 'react';
 import Post from './Post'
-import Trending from './Admin'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Button from '@material-ui/core/Button';
 
 export default class Home extends React.Component {
@@ -11,6 +9,8 @@ export default class Home extends React.Component {
         super(props)
         this.state = {
             inputData: [],
+            userId: "",
+            voterData: [],
             sortLogic : {
                 votes: "asc",
                 timePosted: false
@@ -19,11 +19,14 @@ export default class Home extends React.Component {
     }
     componentDidMount(){
         this.setState({
-            inputData: this.props.getTableData()
+            inputData: this.props.getTableData(),
+            voterData: this.props.voterData,
+            userId: this.props.userId
         }, () => {
             this.sortAscending("votes")
         })
     }
+
 
     updateSortLogic = (attribute, direction) => {
         let localSortLogic = {...this.state.sortLogic}
@@ -47,10 +50,10 @@ export default class Home extends React.Component {
     }
 
     sortByAttribute(attribute){
-        if ( !this.state.sortLogic[attribute] || this.state.sortLogic[attribute] == "desc") {
+        if ( !this.state.sortLogic[attribute] || this.state.sortLogic[attribute] === "desc") {
             this.sortAscending(attribute)
         }
-        else if (this.state.sortLogic[attribute] == "asc") {
+        else if (this.state.sortLogic[attribute] === "asc") {
             this.sortDescending(attribute)
             
         }
@@ -69,6 +72,39 @@ export default class Home extends React.Component {
         })
     }
 
+    decrementVote(postId){
+        let inputData = this.state.inputData.map((post) => {
+            if(post.id ===  postId){
+                post.votes = post.votes - 1
+            }
+            return post
+        })
+        let voterData = this.state.voterData.map((post) => {
+            var i = post.length
+            while(i--){
+                if(post[i]['id'] === postId){
+                    post.splice(i, 1)
+                }
+            }  
+            return post
+        })
+
+        this.setState({
+            inputData: inputData,
+            voterData: voterData
+        })
+    }
+
+    hasUserVoted(postId){
+        let result = false
+        this.state.voterData.map((question)=> {
+            if(eval(question.id) === Number(postId)){
+                result = true
+            }
+        })
+        return result
+    }
+
     render(){
 
         return(
@@ -76,7 +112,8 @@ export default class Home extends React.Component {
                 <Button className="adminButton" onClick={() => {this.sortByAttribute('votes')}}> Sort By Votes</Button>
                 <Button className="adminButton" onClick={() => {this.sortByAttribute('timePosted')}}> Sort By Date</Button>
                 <div className="postContainer">
-                    {this.state.inputData.map((item, index) => <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)} answer={item.answer}/>)}
+                    {this.state.inputData.map((item, index) => 
+                    <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)} decrementVote={this.decrementVote.bind(this)} hasUserVoted={this.hasUserVoted(item.id)} answer={item.answer}/>)}
                 </div>
             </div>
         )
