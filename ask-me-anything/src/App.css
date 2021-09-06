@@ -136,3 +136,20 @@ button:last-of-type.adminButton {
   width: 100%;
   font-size: 120%;
 }
+
+.submitQuestionForm {
+  width:100%
+}
+
+.submitQuestionContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.submitQuestionText {
+  width:100%
+}
+
+.submitQuestionModal {
+  min-width:60%
+}

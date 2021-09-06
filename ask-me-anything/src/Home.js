@@ -2,6 +2,7 @@ import React from 'react';
 import Post from './Post'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from '@material-ui/core/Button';
+import QuestionModal from './QuestionSubmit';
 
 export default class Home extends React.Component {
 
@@ -11,6 +12,7 @@ export default class Home extends React.Component {
             inputData: [],
             userId: "",
             voterData: [],
+            isModalOpen: false,
             sortLogic : {
                 votes: "asc",
                 timePosted: false
@@ -106,12 +108,22 @@ export default class Home extends React.Component {
         return result
     }
 
+    switchModal() {
+        this.setState({
+            isModalOpen: ! this.state.isModalOpen
+        })
+    }
+
     render(){
 
         return(
             <div className="container">
-                <Button className="adminButton" onClick={() => {this.sortByAttribute('votes')}}> Sort By Votes</Button>
-                <Button className="adminButton" onClick={() => {this.sortByAttribute('timePosted')}}> Sort By Date</Button>
+                <div className="submitQuestionContainer">
+                    <textarea onClick={() => this.switchModal()} placeholder='Ask us anything...' className="submitQuestionText"/>
+                    <QuestionModal isModalOpen={this.state.isModalOpen} switchModal={() => this.switchModal()}/>
+                </div>
+                <Button className="adminButton" onClick={() => {this.sortByAttribute('votes')}}>Popular</Button>
+                <Button className="adminButton" onClick={() => {this.sortByAttribute('timePosted')}}>Most Recent</Button>
                 <div className="postContainer">
                     {this.state.inputData.map((item, index) => 
                     <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)} decrementVote={this.decrementVote.bind(this)} hasUserVoted={this.hasUserVoted(item.id)} answer={item.answer}/>)}
