@@ -3,14 +3,10 @@
         "id": "acbde",
         "votes": [
             {
-                "id" : "3",
-                "answerUp": true,
-                "answerDown": false
+                "id" : "3"
             },
             {
-                "id" : "1",
-                "answerUp": true,
-                "answerDown": false
+                "id" : "1"
             }
         ]
     },
@@ -18,9 +14,7 @@
         "id": "xyz123",
         "votes": [
             {
-                "id" : "1",
-                "answerUp": true,
-                "answerDown": false
+                "id" : "1"
             }
         ]
     }

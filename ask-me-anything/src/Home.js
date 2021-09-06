@@ -67,8 +67,14 @@ export default class Home extends React.Component {
             }
             return post
         })
+        let voterData = [].concat(this.state.voterData)
+        voterData.push({
+            id: postId
+        })
+
         this.setState({
-            inputData: inputData
+            inputData: inputData,
+            voterData: voterData
         })
     }
 
@@ -79,14 +85,9 @@ export default class Home extends React.Component {
             }
             return post
         })
-        let voterData = this.state.voterData.map((post) => {
-            var i = post.length
-            while(i--){
-                if(post[i]['id'] === postId){
-                    post.splice(i, 1)
-                }
-            }  
-            return post
+
+        let voterData = this.state.voterData.filter((element) => {
+            return element["id"] != postId
         })
 
         this.setState({
