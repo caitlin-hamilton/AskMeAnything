@@ -50,11 +50,12 @@ function AdminQuestion(props){
                         <p className="question">{props.text}</p>
                         <Button className="editButton">{<GoKebabHorizontal/>}</Button>
                         <h5 className="textStyle">Votes: {props.votes} </h5>
-                        <Dropdown onSelect={updateTheme} className="dropdown">
-                            <Dropdown.Toggle variant="success" id="dropdown-basic" className="dropdown">
+                    
+                        <Dropdown onSelect={updateTheme} title={<span>Dropdown</span>} className="dropdown">
+                            <Dropdown.Toggle className="dropdown">
                                 {setDefaultTheme()}
                             </Dropdown.Toggle>
-                            <Dropdown.Menu>
+                            <Dropdown.Menu className="dropdown">
                                 {themes.map((item) => <Dropdown.Item eventKey={item}>{item}</Dropdown.Item>)}
                             </Dropdown.Menu>
                         </Dropdown>

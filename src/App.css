@@ -108,11 +108,32 @@ button:last-of-type.adminButton {
   flex: 80%;
 }
 
-.dropdown {
+.dropdown.active, .dropdown:active, .open > .dropdown-toggle.dropdown {
+  /* STYLES GO HERE */
+  color:white!important;
+  background-color:yellow!important;
+  border-color:white!important;
+}
+
+ .dropdown{
   flex: 10%;
   overflow:visible;
   width:150px;
+  background-color: yellow;
+  border-color: darkgrey
 }
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle 
+{
+  margin-top: 0;
+  background-color: yellow;
+  border-color: darkgrey;
+} 
+
+.btn.btn-primary.dropdown-toggle {
+  margin-top: 0;
+  background-color: yellow;
+  border-color: darkgrey;
+} 
 
 .ModalCancel {
   width:10px;
