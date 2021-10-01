@@ -108,12 +108,39 @@ button:last-of-type.adminButton {
   flex: 80%;
 }
 
- .dropdown .btn.btn-primary.dropdown-toggle{
+ .dropdown .btn.btn-primary.dropdown-toggle {
   flex: 10%;
   overflow:visible;
   width:150px;
-  background-color: yellow;
-  border-color: darkgrey
+  background-color: darkgrey;
+  color: black;
+  border-color: black;
+}
+
+a.dropdown-item a.dropdown-item:hover{
+  flex: 10%;
+  overflow:visible;
+  width:100%;
+  background-color: darkgrey;
+  color: black;
+  border-color: black;
+}
+.dropdown-menu > a:hover, .dropdown-menu > a:focus {
+  flex: 10%;
+  overflow:visible;
+  width:100%;
+  background-color: lightgrey;
+  color: black;
+  border-color: black;
+}
+
+.dropdown-menu {
+  flex: 10%;
+  overflow:visible;
+  width:100%;
+  background-color: darkgrey;
+  color: black;
+  border-color: black;
 }
 
 .ModalCancel {
