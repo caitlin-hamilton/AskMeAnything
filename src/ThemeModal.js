@@ -11,10 +11,10 @@ export default function ThemeModal(props) {
     updateTheme(event.target.value)
     }
 
-    function submit(){
+    function submit(event){
         themes.push(theme)
-        console.log(themes)
         props.switchModal()
+        event.preventDefault()
     }
     return (
         <Modal show={props.isModalOpen} onHide={props.switchModal}>

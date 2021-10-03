@@ -167,8 +167,8 @@ export default class AdminBoard extends Component {
         return (
             <div>
                 <div className="questionList">
-                    <h1 className="one">All Questions</h1>
-                    <h1 className="two">Sorted Questions</h1>
+                    <h1 className="one">Submissions</h1>
+                    <h1 className="two">Meeting Order</h1>
                 </div>
                 <div className="buttonContainer">
                         <Button className="adminButton" onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
@@ -176,6 +176,7 @@ export default class AdminBoard extends Component {
                         <Button className="adminButton" onClick={() => this.switchModal()}>Edit Themes</Button>
                         <ThemeModal isModalOpen={this.state.isModalOpen} switchModal={() => this.switchModal()}/>
                         <Button className="adminButton">Save Order</Button>
+                        <Button className="adminButton">Start Meeting</Button>
                     </div>
                 <div>
                     <div className="questionList">
@@ -187,7 +188,7 @@ export default class AdminBoard extends Component {
                                         ref={provided.innerRef}
                                         style={getListStyle(snapshot.isDraggingOver)}>
                                         {this.state.inputData.map((item, index) => (
-                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme}/>
+                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme} answer={item.answer}/>
                                         ))}
                                         {provided.placeholder}
                                     </div>
@@ -201,7 +202,7 @@ export default class AdminBoard extends Component {
                                         ref={provided.innerRef}
                                         style={getListStyle(snapshot.isDraggingOver)}>
                                         {this.state.selected.map((item, index) => (
-                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme}/>
+                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme} answer={item.answer}/>
                                         ))}
                                         {provided.placeholder}
                                     </div>
