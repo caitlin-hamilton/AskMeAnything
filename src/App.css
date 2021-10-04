@@ -96,16 +96,25 @@ button.adminButton:nth-last-child(2) {
 }
 
 .question {
-  flex: 80%
+  flex: 80%;
 }
 .editButton {
-  padding:0;
+  padding: 1%!important;
   height:10%;
-  flex: 100%;
+  flex: 0%;
+}
+
+.textContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
 }
 .textStyle {
-  flex: 60%;
+  flex-grow:2
 }
+
 
 .answerContainer {
   flex-direction: row;

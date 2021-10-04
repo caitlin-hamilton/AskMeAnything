@@ -6,7 +6,8 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import themes from './Themes'
 import Button from '@material-ui/core/Button';
 import AdminQuestionModal from './AdminQuestionModal';
-import {AiFillCaretDown, AiFillCaretUp} from "react-icons/ai";
+import {AiFillCaretDown, AiFillCaretUp, AiFillEdit} from "react-icons/ai";
+import {MdAddCircleOutline} from "react-icons/md"
 
 const grid = 8;
 
@@ -91,11 +92,14 @@ export default class AdminQuestion extends React.Component{
                             snapshot.isDragging,
                             provided.draggableProps.style
                         )}>
-                            <Button className="editButton" onClick={() => this.switchModal()}>{<GoKebabHorizontal/>}</Button>
                             <p className="question">{this.props.text}</p>
+                            <Button className="editButton" onClick={() => this.switchModal()}>{<MdAddCircleOutline size={30}/>}</Button>
                             <AdminQuestionModal isModalOpen={this.state.isModalOpen} addAnswer={this.addAnswer} answer={this.state.answer} switchModal={() => this.switchModal()}/>
-                            <h5 className="textStyle">Votes: {this.props.votes} </h5>
-                            <Dropdown onSelect={this.updateTheme} title={<span>Dropdown</span>} className="dropdown">
+                            <div className="textContainer">
+                                <h5 className="textStyle">Votes: {this.props.votes} </h5>
+                                <h5 className="textStyle">Asked By: {this.props.poster}</h5>
+                                <h5 className="textStyle">Posted: {this.props.timePosted}</h5>
+                                <Dropdown onSelect={this.updateTheme} title={<span>Dropdown</span>} className="dropdown">
                                 <Dropdown.Toggle className="dropdown">
                                 {this.state.theme}
                                 </Dropdown.Toggle>
@@ -103,6 +107,7 @@ export default class AdminQuestion extends React.Component{
                                     {themes.map((item) => <Dropdown.Item eventKey={item}>{item}</Dropdown.Item>)}
                                 </Dropdown.Menu>
                             </Dropdown>
+                            </div>
                             {this.renderReply()}
                     </div>
                 )}

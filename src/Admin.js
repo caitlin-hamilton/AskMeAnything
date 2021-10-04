@@ -188,7 +188,7 @@ export default class AdminBoard extends Component {
                                         ref={provided.innerRef}
                                         style={getListStyle(snapshot.isDraggingOver)}>
                                         {this.state.inputData.map((item, index) => (
-                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme} answer={item.answer}/>
+                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
                                         ))}
                                         {provided.placeholder}
                                     </div>
@@ -202,7 +202,7 @@ export default class AdminBoard extends Component {
                                         ref={provided.innerRef}
                                         style={getListStyle(snapshot.isDraggingOver)}>
                                         {this.state.selected.map((item, index) => (
-                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme} answer={item.answer}/>
+                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
                                         ))}
                                         {provided.placeholder}
                                     </div>

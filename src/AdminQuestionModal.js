@@ -18,7 +18,7 @@ export default function AdminQuestionModal(props) {
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={submit}>
-                <textarea onChange={e => setAnswer(e.target.value)} className="submitQuestionText">{(props.answer) ? props.answer : 'Add answer here..'}</textarea>
+                <textarea placeholder="Add answer here..." onChange={e => setAnswer(e.target.value)} className="submitQuestionText">{(props.answer) ? props.answer : ''}</textarea>
                 <input type="submit" value="Submit"/>
             </form>
             <div style={{height:'25px'}}></div>

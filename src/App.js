@@ -18,11 +18,12 @@ export default function App() {
     <Router>
       <div>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="/">User</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="admin">Admin</Nav.Link>
+            <Nav.Link href="adminLive">Admin Live</Nav.Link>
+            <Nav.Link href="/">User</Nav.Link>
           </Nav>
         </Navbar.Collapse>
     </Navbar>
