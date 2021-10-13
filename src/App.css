@@ -126,7 +126,7 @@ button.adminButton:nth-last-child(2) {
  .dropdown .btn.btn-primary.dropdown-toggle {
   flex: 39%;
   overflow:visible;
-  /* width:150px; */
+  width:150px;
   background-color: darkgrey;
   color: black;
   border-color: black;

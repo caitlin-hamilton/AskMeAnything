@@ -26,7 +26,8 @@ class Post extends React.Component {
             poster : this.props.poster,
             votes: this.props.votes,
             id: this.props.id,
-            hasUserVoted: this.props.hasUserVoted
+            hasUserVoted: this.props.hasUserVoted,
+            showAnswer: false
         })
     }
 
@@ -39,22 +40,21 @@ class Post extends React.Component {
         }
     }
 
-    renderAnswer(){
-
+    toggleAnswer(){
+        this.setState({
+            showAnswer: !this.state.showAnswer
+        })
     }
 
     renderReply(){
-        if (this.state.hasAnswer){
+        if (this.state.hasAnswer && this.state.showAnswer){
             return (
-            <div>
-                <ImReply onClick={() => this.renderAnswer()}/>
                 <p>{this.state.answer}</p>
-            </div>
             )
         }
     }
     
-    renderUpVoteButton() {
+    renderVoteButton() {
         if (this.props.hasUserVoted === true){
             return <FaThumbsUp onClick={() => this.props.decrementVote(this.props.id)}/>
         }
@@ -70,9 +70,12 @@ class Post extends React.Component {
             <p className="askedBy">Asked By: {this.state.poster}</p>
             <div className="likeContainer">
                 <p className="voteP">{this.state.votes}</p>
-                {this.renderUpVoteButton()}
+                {this.renderVoteButton()}
             </div>
-            {this.renderReply()}
+            <div className="answerDiv">
+                <ImReply onClick={() => this.toggleAnswer()}/>
+                {this.renderReply()}
+            </div>
         </div>
       );
     }

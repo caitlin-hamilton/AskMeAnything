@@ -3,6 +3,9 @@ import { DragDropContext, Droppable} from 'react-beautiful-dnd';
 import AdminQuestion from './AdminQuestion';
 import Button from '@material-ui/core/Button';
 import ThemeModal from './ThemeModal';
+import themes from './Themes';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -41,6 +44,7 @@ export default class AdminBoard extends Component {
         this.state = {
             inputData: [],
             selected: [],
+            themes: [],
             isModalOpen: false,
             sortLogic : {
                 "inputData" : {
@@ -56,7 +60,8 @@ export default class AdminBoard extends Component {
     }
     componentDidMount(){
         this.setState({
-            inputData: this.props.getTableData()
+            inputData: this.props.getTableData(),
+            themes: themes
         })
     }
 
@@ -158,14 +163,28 @@ export default class AdminBoard extends Component {
         }
     }
 
-    updateTheme = (newTheme, questionId) => {
-        this.updateThemeForInput('inputData', newTheme, questionId)
-        this.updateThemeForInput('selected', newTheme, questionId)
+    updateTheme = (questionList, newTheme, questionId) => {
+        this.updateThemeForInput(questionList, newTheme, questionId)
     }
+    showSuccessfulToast () {
+        toast.success('New Theme Added', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+
+        toast()
+    }
+
 
     render() {
         return (
             <div>
+                <ToastContainer/>
                 <div className="questionList">
                     <h1 className="one">Submissions</h1>
                     <h1 className="two">Meeting Order</h1>
@@ -174,7 +193,7 @@ export default class AdminBoard extends Component {
                         <Button className="adminButton" onClick={() => {this.sortByAttribute('inputData', 'votes')}}>Sort By Votes</Button>
                         <Button className="adminButton" onClick={() => {this.sortByAttribute('inputData', 'timePosted')}}>Sort By Date</Button>
                         <Button className="adminButton" onClick={() => this.switchModal()}>Edit Themes</Button>
-                        <ThemeModal isModalOpen={this.state.isModalOpen} switchModal={() => this.switchModal()}/>
+                        <ThemeModal isModalOpen={this.state.isModalOpen} switchModal={() => this.switchModal()} themes={themes} showSuccessfulToast={() => this.showSuccessfulToast()}/>
                         <Button className="adminButton">Save Order</Button>
                         <Button className="adminButton">Start Meeting</Button>
                     </div>
@@ -188,7 +207,7 @@ export default class AdminBoard extends Component {
                                         ref={provided.innerRef}
                                         style={getListStyle(snapshot.isDraggingOver)}>
                                         {this.state.inputData.map((item, index) => (
-                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
+                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} questionList={'inputData'} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
                                         ))}
                                         {provided.placeholder}
                                     </div>
@@ -202,7 +221,7 @@ export default class AdminBoard extends Component {
                                         ref={provided.innerRef}
                                         style={getListStyle(snapshot.isDraggingOver)}>
                                         {this.state.selected.map((item, index) => (
-                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
+                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} questionList={'selected'} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
                                         ))}
                                         {provided.placeholder}
                                     </div>

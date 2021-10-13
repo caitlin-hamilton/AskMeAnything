@@ -35,7 +35,7 @@ export default class AdminQuestion extends React.Component{
 
     componentDidMount(){
         this.setState({
-            theme: "Select Theme",
+            theme: this.props.theme ? this.props.theme : "Select Theme",
             answer: this.props.answer,
 
         })
@@ -45,12 +45,15 @@ export default class AdminQuestion extends React.Component{
         this.setState({
             theme: evt
         })
+
+        this.props.updateTheme(this.props.questionList, evt, this.props.dragId)
     }
 
     switchModal() {
         this.setState({
             isModalOpen: ! this.state.isModalOpen
         })
+        //make this return a promise
     }
 
     switchShowAnswer(){
