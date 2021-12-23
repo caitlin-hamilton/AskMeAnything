@@ -21,11 +21,11 @@ export default class Home extends React.Component {
     }
     componentDidMount(){
         this.setState({
-            inputData: this.props.getTableData(),
+            inputData: this.props.tableData,
             voterData: this.props.voterData,
             userId: this.props.userId
         }, () => {
-            this.sortAscending("votes")
+            this.sortAscending("timePosted")
         })
     }
 
@@ -120,13 +120,13 @@ export default class Home extends React.Component {
             <div className="container">
                 <div className="submitQuestionContainer">
                     <textarea onClick={() => this.switchModal()} placeholder='Ask us anything...' className="submitQuestionText"/>
-                    <QuestionModal isModalOpen={this.state.isModalOpen} switchModal={() => this.switchModal()}/>
+                    <QuestionModal isModalOpen={this.state.isModalOpen} switchModal={() => this.switchModal()} data={this.state.inputData}/>
                 </div>
                 <Button className="adminButton" onClick={() => {this.sortByAttribute('votes')}}>Popular</Button>
                 <Button className="adminButton" onClick={() => {this.sortByAttribute('timePosted')}}>Most Recent</Button>
                 <div className="postContainer">
                     {this.state.inputData.map((item, index) => 
-                    <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} incrementVote={this.incrementVote.bind(this)} decrementVote={this.decrementVote.bind(this)} hasUserVoted={this.hasUserVoted(item.id)} answer={item.answer}/>)}
+                    <Post votes={item.votes} poster={item.poster} text={item.text} id={item.id} key={item.id} timePosted={item.timePosted} incrementVote={this.incrementVote.bind(this)} decrementVote={this.decrementVote.bind(this)} hasUserVoted={this.hasUserVoted(item.id)} answer={item.answer}/>)}
                 </div>
             </div>
         )

@@ -7,7 +7,7 @@ import themes from './Themes'
 import Button from '@material-ui/core/Button';
 import AdminQuestionModal from './AdminQuestionModal';
 import {AiFillCaretDown, AiFillCaretUp, AiFillEdit} from "react-icons/ai";
-import {MdAddCircleOutline} from "react-icons/md"
+import {MdAddCircleOutline} from "react-icons/md";
 
 const grid = 8;
 
@@ -37,7 +37,6 @@ export default class AdminQuestion extends React.Component{
         this.setState({
             theme: this.props.theme ? this.props.theme : "Select Theme",
             answer: this.props.answer,
-
         })
     }
 
@@ -80,6 +79,29 @@ export default class AdminQuestion extends React.Component{
         })
     }
 
+    formatTime(timeInSeconds){
+        //new Date()/1000
+        const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
+        const today = new Date()
+        let posted = new Date(timeInSeconds *1000)
+        const days = today.getUTCDate() - posted.getUTCDate()
+        const hours = today.getUTCHours() - posted.getUTCHours()
+        const minutes = today.getUTCMinutes() - posted.getUTCMinutes()
+        const seconds = today.getUTCSeconds() - posted.getUTCSeconds()
+        if (days >= 1){
+            return rtf1.format(-days, 'days')
+        }
+        else if (hours >= 1){
+            return rtf1.format(-hours, 'hours')
+        }
+        else if (minutes >= 1){
+            return rtf1.format(-minutes, 'minutes')
+        }
+        else {
+            return rtf1.format(-seconds, 'seconds')
+        }
+    }
+
     render() {
         return (
             <Draggable
@@ -101,7 +123,7 @@ export default class AdminQuestion extends React.Component{
                             <div className="textContainer">
                                 <h5 className="textStyle">Votes: {this.props.votes} </h5>
                                 <h5 className="textStyle">Asked By: {this.props.poster}</h5>
-                                <h5 className="textStyle">Posted: {this.props.timePosted}</h5>
+                                <h5 className="textStyle">Posted: {this.formatTime(this.props.timePosted)}</h5>
                                 <Dropdown onSelect={this.updateTheme} title={<span>Dropdown</span>} className="dropdown">
                                 <Dropdown.Toggle className="dropdown">
                                 {this.state.theme}

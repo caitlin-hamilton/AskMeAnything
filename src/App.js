@@ -14,6 +14,7 @@ import Nav from 'react-bootstrap/Nav'
 export default function App() {
   let userId = "abcde";
   let voterData = getVoteData(userId);
+  let tableData = getTableData();
   return (
     <Router>
       <div>
@@ -22,7 +23,6 @@ export default function App() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="admin">Admin</Nav.Link>
-            <Nav.Link href="adminLive">Admin Live</Nav.Link>
             <Nav.Link href="/">User</Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -32,7 +32,7 @@ export default function App() {
             <AdminBoard getTableData={getTableData}></AdminBoard>
           </Route>
           <Route path="/">
-            <Home getTableData={getTableData} voterData={voterData} userId={userId}></Home> 
+            <Home tableData={tableData} voterData={voterData} userId={userId}></Home> 
           </Route>
         </Switch>
       </div>

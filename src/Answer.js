@@ -4,7 +4,6 @@ import {BsFillCaretUpFill} from "react-icons/bs";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import {ImReply} from "react-icons/im";
 import './App.css'
-import { ThumbDownSharp } from '@material-ui/icons';
 
 export default class Answer extends React.Component {
     constructor(props){

@@ -13,8 +13,8 @@ export default function ThemeModal(props) {
 
     function submit(event){
         props.switchModal()
-        props.themes.push(theme)
         event.preventDefault()
+        props.themes.push(theme)
         props.showSuccessfulToast()
     }
 
