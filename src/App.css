@@ -123,6 +123,21 @@ button.adminButton:nth-last-child(2) {
   align-self: flex-end;
 }
 
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.answerDiv {
+  flex-direction: row;
+  width:100%;
+  align-self: flex-end;
+}
+
+.answerDiv2 {
+  font-weight: bold;
+}
+
  .dropdown .btn.btn-primary.dropdown-toggle {
   flex: 39%;
   overflow:visible;
@@ -172,10 +187,20 @@ a.dropdown-item a.dropdown-item:hover{
 
 .likeContainer {
   display: flex;
+  flex-direction: row;
+  background-color: #E0E0E0;
+  border-radius: 10px/20px;
+  height: max-content;
+  width: 10%;
 }
 
+.voteIcon {
+  margin: auto;
+  size:10%
+}
 .voteP {
-  margin-right: 5px;
+  margin: auto;
+  position: relative;
 }
 
 .askedBy {
@@ -183,8 +208,13 @@ a.dropdown-item a.dropdown-item:hover{
 }
 
 .userQuestion {
+  width: 90%;
+  font-size: 120%;
+}
+.rowPost {
   width: 100%;
   font-size: 120%;
+  display: flex;
 }
 
 .submitQuestionForm {

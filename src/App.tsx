@@ -1,5 +1,5 @@
 import React from 'react';
-import Home from './Home.js'
+import Home from './Home'
 import AdminBoard from './Admin.js'
 import {getTableData, getVoteData} from './api';
 import {
@@ -12,9 +12,11 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
 export default function App() {
-  let userId = "abcde";
-  let voterData = getVoteData(userId);
-  let tableData = getTableData();
+  let userId = 100;
+  let userData = getVoteData(userId);
+  let questionData = getTableData();
+
+
   return (
     <Router>
       <div>
@@ -32,7 +34,7 @@ export default function App() {
             <AdminBoard getTableData={getTableData}></AdminBoard>
           </Route>
           <Route path="/">
-            <Home tableData={tableData} voterData={voterData} userId={userId}></Home> 
+            <Home questions={questionData} userData={userData} userId={userId}></Home> 
           </Route>
         </Switch>
       </div>
