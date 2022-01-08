@@ -2,18 +2,17 @@ import {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaThumbsUp, FaRegThumbsUp} from "react-icons/fa";
 import Button from '@material-ui/core/Button';
-import './App.css'
 
 interface Props {
     text: string;
     answer: string;
     submitter: string;
-    id: number;
+    id: string;
     votes: number;
     hasUserVoted: boolean;
     timePosted: number;
-    incrementVote(id: number): any
-    decrementVote(id: number): any
+    incrementVote(id: string): any
+    decrementVote(id: string): any
 }
 
 const Post = (props: Props) => {

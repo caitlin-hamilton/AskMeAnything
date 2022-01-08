@@ -3,10 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BsFillCaretUpFill} from "react-icons/bs";
 import { FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import {ImReply} from "react-icons/im";
-import './App.css'
+import '../App.css'
 
 export default class Answer extends React.Component {
-    constructor(props){
+    constructor(){
         super()
         this.state ={
             answerText : ""

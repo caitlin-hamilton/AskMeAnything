@@ -29,11 +29,9 @@ const move = (source, destination, droppableSource, droppableDestination) => {
     return result;
 };
 
-const grid = 8;
-
 const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? 'lightblue' : 'darkgrey',
-    padding: grid,
+    padding: 8,
     width: "100%",
     height:"100%"
 });

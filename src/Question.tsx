@@ -1,11 +1,10 @@
-interface Question {
+
+export default interface Question {
     text: string;
-    id: number;
+    id: string;
     poster: string;
     votes: number
     timePosted: number;
     theme: string;
     answer: string
 }
-
-export default Question

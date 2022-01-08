@@ -1,7 +1,6 @@
-import React from 'react';
-import Home from './Home'
-import AdminBoard from './Admin.js'
-import {getTableData, getVoteData} from './api';
+import Home from './user_components/Home'
+import AdminBoard from './admin_components/Admin.js'
+import {getQuestionData, getVoteData} from './api';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,12 +10,9 @@ import {
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
+const userId: string = "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d";
+
 export default function App() {
-  let userId = 100;
-  let userData = getVoteData(userId);
-  let questionData = getTableData();
-
-
   return (
     <Router>
       <div>
@@ -31,10 +27,10 @@ export default function App() {
     </Navbar>
         <Switch>
           <Route path="/admin">
-            <AdminBoard getTableData={getTableData}></AdminBoard>
+            <AdminBoard getTableData={getQuestionData}></AdminBoard>
           </Route>
           <Route path="/">
-            <Home questions={questionData} userData={userData} userId={userId}></Home> 
+            <Home getQuestions={getQuestionData} getUserData={getVoteData} userId={userId}></Home> 
           </Route>
         </Switch>
       </div>

@@ -1,6 +1,6 @@
 import React, {useState}  from 'react';
 import { Modal } from 'react-bootstrap';
-import Question from './Question'
+import Question from '../Question'
 
 interface Props {
     addNewQuestion(newQuestion: Question): any;
@@ -14,10 +14,14 @@ export default function QuestionModal(props: Props) {
     const [questionText, setQuestionText] = useState("")
     const [user, setUser] = useState("Anonymous")
 
+    function randomInteger(min:number, max:number) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
     function submit(event: React.FormEvent){
         const today: Date = new Date()
         const newQuestion: Question  = {
-            id: Math.random(),  //obviously this is not ideal but fine for demo purposes
+            id: randomInteger(7, 1000).toString(),  //obviously this is not ideal but fine for demo purposes
             text: questionText,
             poster: user,
             votes: 0,

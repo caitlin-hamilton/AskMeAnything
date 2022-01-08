@@ -3,13 +3,14 @@ import Post from './Post'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from '@material-ui/core/Button';
 import QuestionModal from './QuestionSubmit';
-import Question from './Question'
+import Question from '../Question'
 import {AiOutlineArrowDown, AiOutlineArrowUp} from "react-icons/ai";
+import '../App.css'
 
 interface Props {
-    questions: Array<Question>;
-    userId: number;
-    userData: Array<number>;
+    getQuestions(): Array<Question>;
+    userId: string;
+    getUserData(userId: string): Array<string>;
 }
 
 interface SortLogicI {
@@ -20,19 +21,18 @@ interface SortLogicI {
 const sortLogicObj: SortLogicI = {votes: false, timePosted: 'desc'}
 
 const Home = (props: Props) => {
-    const [questions, setQuestions]  = useState<Question[]>([])
-    const [userData, setUserData] = useState(Array<number>())
+    const [questions, setQuestions]  = useState(Array<Question>())
+    const [userData, setUserData] = useState(Array<string>())
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [sortLogic, setSortLogic] = useState(sortLogicObj)
 
     useEffect(() => {
         //initial mount
-        sortQuestions('asc', props.questions, 'timePosted')
-        setUserData(props.userData)
+        sortQuestions('asc', props.getQuestions(), 'timePosted')
+        setUserData(props.getUserData(props.userId))
     }, [])
 
     function sortQuestions(direction: string |boolean, data:Array<Question>, attribute: keyof Question) {
-        
         let sortedData = [...data]
         if(direction === 'desc'){
             sortedData.sort((a, b) => {
@@ -70,55 +70,53 @@ const Home = (props: Props) => {
         let updatedSortLogic = {...sortLogic}
         let objKeys = Object.keys(updatedSortLogic) as Array<keyof SortLogicI>
 
-        objKeys.forEach(v => {
-            if(v === attribute){
-                updatedSortLogic[v] = direction
+        objKeys.forEach(key => {
+            if(key === attribute){
+                updatedSortLogic[key] = direction
             }
             else {
-                updatedSortLogic[v] = false 
+                updatedSortLogic[key] = false 
             }
         })
         setSortLogic(updatedSortLogic)
     }
-    function hasUserVoted(postId: number){
-        let result = false
-        userData.map((questionId)=> {
-            if(questionId === Number(postId)){
-                result = true
-            }
-        })
-        return result
-    }
-    function incrementVote(postId:number){
+    function incrementVote(postId:string){
         let newQuestionData = questions.map((post) => {
             if(post.id ===  postId){
                 post.votes = post.votes + 1
             }
             return post
         })
-        let newUserData: number[] = [...userData]
+        let newUserData: string[] = [...userData]
         newUserData.push(postId)
 
         setUserData(newUserData)
         setQuestions(newQuestionData)
     }
 
-    function decrementVote(postId:number){
+    function decrementVote(postId:string){
         let newQuestionData = questions.map((post) => {
             if(post.id ===  postId){
                 post.votes = post.votes - 1
             }
             return post
         })
-        let newUserData: number[] = userData.filter((element) => {
+        let newUserData: string[] = userData.filter((element) => {
             return element !== postId
         })
 
         setUserData(newUserData)
         setQuestions(newQuestionData)
     }
-
-
+    function hasUserVoted(postId: string){
+        let result = false
+        userData.map((questionId)=> {
+            if(questionId === postId){
+                result = true
+            }
+        })
+        return result
+    }
     function switchModal() {
         isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true)
     }
