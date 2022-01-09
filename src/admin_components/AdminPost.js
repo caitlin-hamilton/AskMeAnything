@@ -101,7 +101,7 @@ export default class AdminPost extends React.Component{
                             <div className="textContainer">
                                 <h5 className="textStyle">Votes: {this.props.votes} </h5>
                                 <h5 className="textStyle">Asked By: {this.props.poster}</h5>
-                                <h5 className="textStyle">Posted: {this.formatTime(this.props.timePosted)}</h5>
+                                <h5 className="textStyle">Posted: {formatTime(this.props.timePosted)}</h5>
                                 <Dropdown onSelect={this.updateTheme} title={<span>Dropdown</span>} className="dropdown">
                                 <Dropdown.Toggle className="dropdown">
                                 {this.state.theme}
