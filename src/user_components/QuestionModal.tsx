@@ -1,18 +1,25 @@
-import React, {useState}  from 'react';
+import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import Question from '../Question'
+import {getUserName} from '../api'
 
 interface Props {
     addNewQuestion(newQuestion: Question): any;
     isModalOpen: boolean;
-    switchModal(): any
+    switchModal(): any;
+    userId: string;
 
+}
+
+const initialState = {
+    questionText: '',
+    user: 'Anonymous'
 }
 
 export default function QuestionModal(props: Props) {
 
-    const [questionText, setQuestionText] = useState("")
-    const [user, setUser] = useState("Anonymous")
+    const [questionText, setQuestionText] = useState(initialState.questionText)
+    const [user, setUser] = useState(initialState.user)
 
     function randomInteger(min:number, max:number) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -25,12 +32,14 @@ export default function QuestionModal(props: Props) {
             text: questionText,
             poster: user,
             votes: 0,
-            timePosted: Number(today)/1000,
+            timePosted: Number(today),
             theme: "",
             answer: ""
         }
         props.addNewQuestion(newQuestion)
         props.switchModal()
+        setQuestionText(initialState.questionText)
+        setUser(initialState.user)
         event.preventDefault()
     }
     function handleUser(event: React.ChangeEvent<HTMLInputElement>){
@@ -39,9 +48,9 @@ export default function QuestionModal(props: Props) {
             setUser("Anonymous")
         }
         else {
-            setUser('Caitlin Hamilton')
-        }
+            setUser(getUserName(props.userId))
 
+        }
     }
 
     return (

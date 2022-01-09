@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import AdminQuestionModal from './AdminQuestionModal';
 import {AiFillCaretDown, AiFillCaretUp, AiFillEdit} from "react-icons/ai";
 import {MdAddCircleOutline} from "react-icons/md";
+import formatTime from '../utils/formatTime'
 
 const grid = 8;
 
@@ -19,7 +20,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     ...draggableStyle
   });
 
-export default class AdminQuestion extends React.Component{
+export default class AdminPost extends React.Component{
 
     constructor(props){
         super(props)
@@ -77,29 +78,6 @@ export default class AdminQuestion extends React.Component{
         this.setState({
             answer: answer
         })
-    }
-
-    formatTime(timeInSeconds){
-        //new Date()/1000
-        const rtf1 = new Intl.RelativeTimeFormat('en', { style: 'narrow' });
-        const today = new Date()
-        let posted = new Date(timeInSeconds *1000)
-        const days = today.getUTCDate() - posted.getUTCDate()
-        const hours = today.getUTCHours() - posted.getUTCHours()
-        const minutes = today.getUTCMinutes() - posted.getUTCMinutes()
-        const seconds = today.getUTCSeconds() - posted.getUTCSeconds()
-        if (days >= 1){
-            return rtf1.format(-days, 'days')
-        }
-        else if (hours >= 1){
-            return rtf1.format(-hours, 'hours')
-        }
-        else if (minutes >= 1){
-            return rtf1.format(-minutes, 'minutes')
-        }
-        else {
-            return rtf1.format(-seconds, 'seconds')
-        }
     }
 
     render() {
