@@ -1,5 +1,5 @@
-import UserHome from './user_components/UserHome'
-import AdminHome from './admin_components/AdminHome.js'
+import Home from './user_components/Home'
+import AdminBoard from './admin_components/Admin.js'
 import {getQuestionData, getVoteData} from './api';
 import {
   BrowserRouter as Router,
@@ -27,10 +27,10 @@ export default function App() {
     </Navbar>
         <Switch>
           <Route path="/admin">
-            <AdminHome getTableData={getQuestionData}></AdminHome>
+            <AdminBoard getTableData={getQuestionData}></AdminBoard>
           </Route>
           <Route path="/">
-            <UserHome getQuestions={getQuestionData} getUserData={getVoteData} userId={userId}></UserHome> 
+            <Home getQuestions={getQuestionData} getUserData={getVoteData} userId={userId}></Home> 
           </Route>
         </Switch>
       </div>

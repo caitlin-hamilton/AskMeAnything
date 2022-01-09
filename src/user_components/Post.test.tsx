@@ -1,9 +1,9 @@
 import React from 'react';
-import UserPost from './UserPost';
-import Enzyme, {shallow} from 'enzyme';
+import Post from './Post';
+import Enzyme, {shallow, mount} from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Button from '@material-ui/core/Button';
-import {render, screen} from '@testing-library/react'
+import {render, fireEvent, waitFor, screen} from '@testing-library/react'
 
 //enzyme tests
 
@@ -11,7 +11,7 @@ Enzyme.configure({adapter: new Adapter()});
 
 describe('PostTestComponent', () => {
     test('show answer on click', () => {
-        const wrapper = shallow(<UserPost text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={"1"} hasUserVoted={true} timePosted={1641225006000} incrementVote={() => {}} decrementVote={() => {}}/>)
+        const wrapper = shallow(<Post text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={1} hasUserVoted={true} timePosted={1641225006} incrementVote={() => {}} decrementVote={() => {}}/>)
         expect(wrapper.find('.answerDiv p').length).toBe(0)
         expect(wrapper.find(Button).text()).toBe('Show Answer')
         wrapper.find(Button).simulate('click')
@@ -24,23 +24,23 @@ describe('PostTestComponent', () => {
         //Current time is 14:00
 
         //time submitted is 14:00
-        let wrapper = shallow(<UserPost text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={"1"} hasUserVoted={true} timePosted={1641304800000} incrementVote={() => {}} decrementVote={() => {}}/>)
+        let wrapper = shallow(<Post text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={1} hasUserVoted={true} timePosted={1641304800} incrementVote={() => {}} decrementVote={() => {}}/>)
         expect(wrapper.find('p').at(3).text()).toBe('Posted: 0 sec. ago')
 
         //submitted at 13:59:55
-        wrapper = shallow(<UserPost text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={"1"} hasUserVoted={true} timePosted={1641304795000} incrementVote={() => {}} decrementVote={() => {}}/>)
+        wrapper = shallow(<Post text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={1} hasUserVoted={true} timePosted={1641304795} incrementVote={() => {}} decrementVote={() => {}}/>)
         expect(wrapper.find('p').at(3).text()).toBe('Posted: 5 sec. ago')
 
         // //time submitted is 13:30
-        wrapper = shallow(<UserPost text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={"1"} hasUserVoted={true} timePosted={1641303001000} incrementVote={() => {}} decrementVote={() => {}}/>)
+        wrapper = shallow(<Post text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={1} hasUserVoted={true} timePosted={1641303001} incrementVote={() => {}} decrementVote={() => {}}/>)
         expect(wrapper.find('p').at(3).text()).toBe('Posted: 30 min. ago')
 
         //time submitted is 12:30
-        wrapper = shallow(<UserPost text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={"1"} hasUserVoted={true} timePosted={1641299401000} incrementVote={() => {}} decrementVote={() => {}}/>)
+        wrapper = shallow(<Post text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={1} hasUserVoted={true} timePosted={1641299401} incrementVote={() => {}} decrementVote={() => {}}/>)
         expect(wrapper.find('p').at(3).text()).toBe('Posted: 1 hr. ago')
 
         //time submitted is 23 hours ago 
-        wrapper = shallow(<UserPost text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={"1"} hasUserVoted={true} timePosted={1641214801000} incrementVote={() => {}} decrementVote={() => {}}/>)
+        wrapper = shallow(<Post text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={1} hasUserVoted={true} timePosted={1641214801} incrementVote={() => {}} decrementVote={() => {}}/>)
         expect(wrapper.find('p').at(3).text()).toBe('Posted: 1 day ago')
     })
 
@@ -50,14 +50,18 @@ describe('PostTestComponent', () => {
         //xCurrent time is 14:02
 
         //time submitted is 14:01
-        let wrapper = shallow(<UserPost text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={"1"}hasUserVoted={true} timePosted={1641304860000} incrementVote={() => {}} decrementVote={() => {}}/>)
+        let wrapper = shallow(<Post text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={1} hasUserVoted={true} timePosted={1641304860} incrementVote={() => {}} decrementVote={() => {}}/>)
         expect(wrapper.find('p').at(3).text()).toBe('Posted: 1 min. ago')
     })
-    //react testing library tests
+})
+
+//react testing library tests
+describe('PostTestComponentReactTestingLibrary', () => {
     test('has correct formatted time', () => {
         jest.useFakeTimers('modern');
         jest.setSystemTime(new Date(1641304800000));
-        render(<UserPost text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={"1"} hasUserVoted={true} timePosted={1641304800000} incrementVote={() => {}} decrementVote={() => {}}/>)
-        expect(screen.getByText('Posted: 0 sec. ago')).toBe(true)
+
+        render(<Post text={"Question"} answer={"Answer text"} submitter={"Caitlin"} votes={200} id={1} hasUserVoted={true} timePosted={1641304800} incrementVote={() => {}} decrementVote={() => {}}/>)
+        expect(screen.getByText('Posted: 0 sec. ago'))
     })
 })
