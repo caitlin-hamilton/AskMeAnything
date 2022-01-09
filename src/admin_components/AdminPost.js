@@ -19,7 +19,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
     ...draggableStyle
   });
 
-export default class AdminQuestion extends React.Component{
+export default class AdminPost extends React.Component{
 
     constructor(props){
         super(props)

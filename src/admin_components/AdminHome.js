@@ -1,6 +1,6 @@
 import React, { Component} from 'react';
 import { DragDropContext, Droppable} from 'react-beautiful-dnd';
-import AdminQuestion from './AdminQuestion';
+import AdminPost from './AdminPost';
 import Button from '@material-ui/core/Button';
 import ThemeModal from './ThemeModal';
 import themes from './Themes';
@@ -36,7 +36,7 @@ const getListStyle = isDraggingOver => ({
     height:"100%"
 });
 
-export default class AdminBoard extends Component {
+export default class AdminHome extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -205,7 +205,7 @@ export default class AdminBoard extends Component {
                                         ref={provided.innerRef}
                                         style={getListStyle(snapshot.isDraggingOver)}>
                                         {this.state.inputData.map((item, index) => (
-                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} questionList={'inputData'} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
+                                            <AdminPost  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} questionList={'inputData'} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
                                         ))}
                                         {provided.placeholder}
                                     </div>
@@ -219,7 +219,7 @@ export default class AdminBoard extends Component {
                                         ref={provided.innerRef}
                                         style={getListStyle(snapshot.isDraggingOver)}>
                                         {this.state.selected.map((item, index) => (
-                                            <AdminQuestion  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} questionList={'selected'} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
+                                            <AdminPost  provided={provided} snapshot = {snapshot} text={item.text} key={item.id} dragId={item.id} index={index} timePosted={item.timePosted} votes={item.votes} theme={item.theme} questionList={'selected'} updateTheme={this.updateTheme} answer={item.answer} poster={item.poster}/>
                                         ))}
                                         {provided.placeholder}
                                     </div>
