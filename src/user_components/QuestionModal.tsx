@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import Question from "../Question";
 import { getUserName } from "../api";
+import '../App.css'
 
 interface Props {
   addNewQuestion(newQuestion: Question): any;
   isModalOpen: boolean;
   switchModal(): any;
   userId: string;
+  numberOfQuestions: number
 }
 
 const initialState = {
@@ -19,14 +21,16 @@ export default function QuestionModal(props: Props) {
   const [questionText, setQuestionText] = useState(initialState.questionText);
   const [user, setUser] = useState(initialState.user);
 
-  function randomInteger(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  function resetModal(){
+    setQuestionText(initialState.questionText); //otherwise it remembers state from previous question
+    setUser(initialState.user);
+    props.switchModal();
   }
 
-  function submit(event: React.FormEvent) {
+  function postNewQuestion(){
     const today: Date = new Date();
     const newQuestion: Question = {
-      id: randomInteger(7, 1000).toString(), //obviously this is not ideal but fine for demo purposes
+      id: props.numberOfQuestions.toString() + 1, //obviously this is not ideal but fine for demo purposes
       text: questionText,
       poster: user,
       votes: 0,
@@ -35,14 +39,16 @@ export default function QuestionModal(props: Props) {
       answer: "",
     };
     props.addNewQuestion(newQuestion);
-    props.switchModal();
-    setQuestionText(initialState.questionText);
-    setUser(initialState.user);
+  }
+
+  function submit(event: React.FormEvent) {
+    postNewQuestion()
+    resetModal()
     event.preventDefault();
   }
+
   function handleUser(event: React.ChangeEvent<HTMLInputElement>) {
-    let isChecked = event.target.checked;
-    if (isChecked) {
+    if (event.target.checked) {
       setUser("Anonymous");
     } else {
       setUser(getUserName(props.userId));
@@ -62,14 +68,13 @@ export default function QuestionModal(props: Props) {
         <form onSubmit={submit}>
           <textarea
             rows={4}
-            className="submitQuestionForm"
+            style={{width: '100%'}}
             placeholder="Ask us anything..."
             onChange={(e) => setQuestionText(e.target.value)}
             required
           />
           <div>
             <input
-              className="questionSubmitContainer"
               id="isAnonymous"
               type="checkbox"
               onChange={(e) => handleUser(e)}

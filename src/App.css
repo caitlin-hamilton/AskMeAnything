@@ -1,13 +1,3 @@
-.questionList {
-  display: flex;
-  width: 100%;
-}
-.buttonContainer {
-  display: flex;
-  width: 100%;
-  height: 10%;
-}
-
 input[type="submit"] {
   padding: 5px 15px;
   background: #ccc;
@@ -15,12 +5,6 @@ input[type="submit"] {
   cursor: pointer;
   -webkit-border-radius: 5px;
   border-radius: 5px;
-}
-
-.buttonContainerDelete {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
 }
 
 button.adminButton {
@@ -32,112 +16,10 @@ button.adminButton:nth-last-child(2) {
   margin-left: auto;
 }
 
-.container {
-  width: 100%;
-  height: 10%;
-}
-
-.one {
-  width: 50%;
-  height: 100%;
-  display: flex;
-}
-
-.two {
-  width: 50%;
-  height: 100%;
-  display: flex;
-}
-
-.postContainer {
-  display: inline-flex;
-  flex-direction: column;
-  padding: 15px;
-  align-self: center;
-  background: darkgray;
-}
-
-.userButtonContainer {
-  flex-wrap: wrap;
-  margin-right: auto;
-}
-
-.userPost {
-  padding-top: 50px;
-  display: inline-block;
-  padding-bottom: 50px;
-  width: 100%;
-  text-align: left;
-  margin-bottom: 10px;
-  border-style: solid;
-  border-width: 1px;
-  padding: 10px;
-  background: lightgray;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  word-wrap: break-word;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: visible;
-}
-
-.adminPost {
-  padding-top: 50px;
-  padding-bottom: 50px;
-  width: 100%;
-  margin-bottom: 10px;
-  border-style: solid;
-  border-width: 1px;
-  padding: 10px;
-  background: lightgray;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  word-wrap: break-word;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: visible;
-}
-
-.question {
-  flex: 80%;
-}
 .editButton {
   padding: 1% !important;
   height: 10%;
   flex: 0%;
-}
-
-.textContainer {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: baseline;
-}
-.textStyle {
-  flex-grow: 2;
-}
-
-.answerContainer {
-  flex-direction: row;
-  flex: 50%;
-  width: 100%;
-  align-self: flex-end;
-}
-
-.break {
-  flex-basis: 100%;
-  height: 0;
-}
-
-.answerDiv {
-  flex-direction: row;
-  width: 100%;
-  align-self: flex-end;
-}
-
-.answerDiv2 {
-  font-weight: bold;
 }
 
 .dropdown .btn.btn-primary.dropdown-toggle {
@@ -183,58 +65,9 @@ a.dropdown-item a.dropdown-item:hover {
   border-color: black;
 }
 
-.ModalCancel {
-  width: 10px;
-  float: right;
-  text-align: right;
-}
-
-.likeContainer {
-  display: flex;
-  flex-direction: row;
-  background-color: #e0e0e0;
-  border-radius: 10px/20px;
-  height: max-content;
-  width: 10%;
-}
-
 .voteIcon {
   margin: auto;
   size: 10%;
 }
-.voteP {
-  margin: auto;
-  position: relative;
-}
 
-.askedBy {
-  margin-right: auto;
-}
 
-.userQuestion {
-  width: 90%;
-  font-size: 120%;
-}
-.rowPost {
-  width: 100%;
-  font-size: 120%;
-  display: flex;
-}
-
-.submitQuestionForm {
-  width: 100%;
-}
-
-.submitQuestionContainer {
-  display: flex;
-  justify-content: center;
-}
-
-.submitQuestionText {
-  width: 100%;
-  height: 100px;
-}
-
-.submitQuestionModal {
-  min-width: 60%;
-}

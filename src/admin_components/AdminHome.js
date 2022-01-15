@@ -6,6 +6,8 @@ import ThemeModal from "./ThemeModal";
 import themes from "./Themes";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {QuestionHeading, QuestionContainer} from './AdminComponents.styled'
+import '../App.css'
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -187,11 +189,11 @@ export default class AdminHome extends Component {
     return (
       <div>
         <ToastContainer />
-        <div className="questionList">
-          <h1 className="one">Submissions</h1>
-          <h1 className="two">Meeting Order</h1>
+        <div style={{display: 'flex', width:'100%'}}>
+          <QuestionHeading>Submissions</QuestionHeading>
+          <QuestionHeading>Meeting Order</QuestionHeading>
         </div>
-        <div className="buttonContainer">
+        <div style={{flexWrap: 'wrap', marginRight:'auto'}}>
           <Button
             className="adminButton"
             onClick={() => {
@@ -220,10 +222,9 @@ export default class AdminHome extends Component {
           <Button className="adminButton">Save Order</Button>
           <Button className="adminButton">Start Meeting</Button>
         </div>
-        <div>
-          <div className="questionList">
+          <div style={{display: 'flex', width: '100%'}}>
             <DragDropContext onDragEnd={this.onDragEnd}>
-              <div className="one">
+              <QuestionContainer>
                 <Droppable droppableId="droppable">
                   {(provided, snapshot) => (
                     <div
@@ -251,8 +252,8 @@ export default class AdminHome extends Component {
                     </div>
                   )}
                 </Droppable>
-              </div>
-              <div className="two">
+              </QuestionContainer>
+              <QuestionContainer>
                 <Droppable droppableId="droppable2">
                   {(provided, snapshot) => (
                     <div
@@ -280,10 +281,9 @@ export default class AdminHome extends Component {
                     </div>
                   )}
                 </Droppable>
-              </div>
+              </QuestionContainer>
             </DragDropContext>
           </div>
-        </div>
       </div>
     );
   }

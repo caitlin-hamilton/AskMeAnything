@@ -20,7 +20,8 @@ export default function AdminQuestionModal(props) {
           <textarea
             placeholder="Add answer here..."
             onChange={(e) => setAnswer(e.target.value)}
-            className="submitQuestionText"
+            style={{width: '100%', height: '100px'}}
+            required
           >
             {props.answer ? props.answer : ""}
           </textarea>

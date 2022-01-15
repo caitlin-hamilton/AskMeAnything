@@ -1,14 +1,12 @@
 import React from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { GoKebabHorizontal } from "react-icons/go";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import themes from "./Themes";
 import Button from "@material-ui/core/Button";
 import AdminQuestionModal from "./AdminQuestionModal";
-import { AiFillCaretDown, AiFillCaretUp, AiFillEdit } from "react-icons/ai";
 import { MdAddCircleOutline } from "react-icons/md";
 import formatTime from "../utils/formatTime";
+import {AnswerContainer, AdminPostContainer, TextContainer} from './AdminComponents.styled'
 
 const grid = 8;
 
@@ -52,7 +50,6 @@ export default class AdminPost extends React.Component {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
     });
-    //make this return a promise
   }
 
   switchShowAnswer() {
@@ -61,24 +58,23 @@ export default class AdminPost extends React.Component {
     });
   }
 
-  renderReply() {
-    if (this.state.answer != "") {
-      return (
-        <div className="answerContainer">
-          <Button onClick={() => this.switchShowAnswer()}>
-            {" "}
-            {this.state.showAnswer ? (
-              <AiFillCaretUp />
-            ) : (
-              <AiFillCaretDown />
-            )}{" "}
-            Show Answer
-          </Button>
-          {this.state.showAnswer ? <p>{this.state.answer}</p> : <p></p>}
-        </div>
-      );
-    }
+renderReply() {
+  if (this.state.answer) {
+    return (
+      <AnswerContainer>
+        <Button onClick={() => this.switchShowAnswer()}>
+          {this.state.showAnswer ? (
+              <p>Hide Answer</p>
+          ) : (
+              <p>Show Answer</p>
+          )}
+        </Button>
+        {this.state.showAnswer ? <p>{this.state.answer}</p> : ""}
+      </AnswerContainer>
+    );
   }
+}
+
 
   addAnswer(answer) {
     this.setState({
@@ -94,8 +90,7 @@ export default class AdminPost extends React.Component {
         index={this.props.index}
       >
         {(provided, snapshot) => (
-          <div
-            className="adminPost"
+          <AdminPostContainer
             ref={provided.innerRef}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
@@ -104,7 +99,7 @@ export default class AdminPost extends React.Component {
               provided.draggableProps.style
             )}
           >
-            <p className="question">{this.props.text}</p>
+            <p style={{flex: '80%'}}>{this.props.text}</p>
             <Button className="editButton" onClick={() => this.switchModal()}>
               {<MdAddCircleOutline size={30} />}
             </Button>
@@ -114,10 +109,10 @@ export default class AdminPost extends React.Component {
               answer={this.state.answer}
               switchModal={() => this.switchModal()}
             />
-            <div className="textContainer">
-              <h5 className="textStyle">Votes: {this.props.votes} </h5>
-              <h5 className="textStyle">Asked By: {this.props.poster}</h5>
-              <h5 className="textStyle">
+            <TextContainer>
+              <h5 style={{flexGrow:2}}>Votes: {this.props.votes} </h5>
+              <h5 style={{flexGrow:2}}>Asked By: {this.props.poster}</h5>
+              <h5 style={{flexGrow:2}}>
                 Posted: {formatTime(this.props.timePosted)}
               </h5>
               <Dropdown
@@ -134,9 +129,9 @@ export default class AdminPost extends React.Component {
                   ))}
                 </Dropdown.Menu>
               </Dropdown>
-            </div>
+            </TextContainer>
             {this.renderReply()}
-          </div>
+          </AdminPostContainer>
         )}
       </Draggable>
     );

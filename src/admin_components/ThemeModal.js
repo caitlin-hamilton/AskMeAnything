@@ -3,6 +3,7 @@ import themes from "./Themes";
 import { Modal } from "react-bootstrap";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
+import {ButtonContainerDelete} from './AdminComponents.styled'
 
 export default function ThemeModal(props) {
   const [theme, updateTheme] = useState("");
@@ -34,12 +35,13 @@ export default function ThemeModal(props) {
           <input
             onChange={updateThemeForm}
             placeholder="Add new theme"
-            maxLength={12}
+            maxLength={12} 
+            required
           />
           <input type="submit" value="Submit" />
         </form>
         <div style={{ height: "25px" }}></div>
-        <div className="buttonContainerDelete">
+        <ButtonContainerDelete>
           {themes.map((item) => (
             <Button
               variant="contained"
@@ -50,7 +52,7 @@ export default function ThemeModal(props) {
               {item}
             </Button>
           ))}
-        </div>
+        </ButtonContainerDelete>
       </Modal.Body>
     </Modal>
   );

@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import QuestionModal from "./QuestionModal";
 import Question from "../Question";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
-import "../App.css";
+import {UserPostContainer, Container} from './UserComponents.styled'
 
 interface Props {
   getQuestions(): Array<Question>;
@@ -32,6 +32,7 @@ const UserHome = (props: Props) => {
     setUserData(props.getUserData(props.userId));
   }, []);
 
+  
   function sortQuestions(
     direction: string | boolean,
     data: Array<Question>,
@@ -53,13 +54,12 @@ const UserHome = (props: Props) => {
       sortedData.sort((a, b) => {
         if (a[attribute] < b[attribute]) {
           return 1;
-        }
-
-        if (a[attribute] >= b[attribute]) {
+        } else if (a[attribute] >= b[attribute]) {
           return -1;
         }
-
-        return 0;
+        else {
+          return 0;
+        }
       });
       updateSortLogic(attribute, "asc");
     }
@@ -135,22 +135,24 @@ const UserHome = (props: Props) => {
     }
   }
   return (
-    <div className="container">
-      <div className="submitQuestionContainer">
+    <Container>
+      <div className="container">
+      <div style={{display: 'flex', justifyContent: 'center'}}>
         <textarea
           onClick={() => switchModal()}
           placeholder="Ask us anything..."
-          className="submitQuestionText"
+          style={{width: '100%', height:'100px'}}
         />
         <QuestionModal
           isModalOpen={isModalOpen}
           switchModal={() => switchModal()}
           addNewQuestion={addNewQuestion}
           userId={props.userId}
+          numberOfQuestions={questions.length}
         />
       </div>
       <Button
-        className="adminButton"
+        style={{height:'10%', width:'auto'}}
         onClick={() => {
           sortQuestions(getNewSortDirection("votes"), questions, "votes");
         }}
@@ -158,7 +160,7 @@ const UserHome = (props: Props) => {
         Popular {buttonAttributeDirecton("votes")}
       </Button>
       <Button
-        className="adminButton"
+        style={{height:'10%', width:'auto'}}
         onClick={() => {
           sortQuestions(
             getNewSortDirection("timePosted"),
@@ -169,7 +171,7 @@ const UserHome = (props: Props) => {
       >
         Most Recent {buttonAttributeDirecton("timePosted")}
       </Button>
-      <div className="postContainer">
+      <UserPostContainer>
         {questions.map((item) => (
           <UserPost
             votes={item.votes}
@@ -184,8 +186,9 @@ const UserHome = (props: Props) => {
             answer={item.answer}
           />
         ))}
+      </UserPostContainer>
       </div>
-    </div>
+    </Container>
   );
 };
 

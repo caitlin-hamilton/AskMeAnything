@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 import Button from "@material-ui/core/Button";
 import formatTime from "../utils/formatTime";
+import {PostDiv, PostTopDiv, PostQuestionPara, LikeContainer, AnswerDiv} from './UserComponents.styled'
 
 interface Props {
   text: string;
@@ -12,22 +12,19 @@ interface Props {
   votes: number;
   hasUserVoted: boolean;
   timePosted: number;
-  incrementVote(id: string): any;
-  decrementVote(id: string): any;
+  incrementVote(id: string): void;
+  decrementVote(id: string): void;
 }
 
 const UserPost = (props: Props) => {
   const [showAnswer, setShowAnswer] = useState(false);
-  const [userVoted, setUserVoted] = useState(false);
 
   useEffect(() => {
-    setUserVoted(props.hasUserVoted);
   }, [props.hasUserVoted]);
 
-  //React Hook useEffect contains a call to 'setUserVoted'. Without a list of dependencies, this can lead to an infinite chain of updates. To fix this, pass [props.hasUserVoted] as a second argument to the useEffect Hook.
 
   function renderVoteButton() {
-    if (userVoted === true) {
+    if (props.hasUserVoted === true) {
       return (
         <FaThumbsUp
           data-testid="btn-decr"
@@ -57,7 +54,7 @@ const UserPost = (props: Props) => {
       return <p>{props.answer}</p>;
     } else if (!props.answer)
       return (
-        <div className="answerDiv2">
+        <div style={{fontWeight:'bold'}}>
           <p>No Answer yet..</p>
         </div>
       );
@@ -72,28 +69,28 @@ const UserPost = (props: Props) => {
   }
 
   return (
-    <div className="userPost">
-      <div className="rowPost">
-        <p className="userQuestion">{props.text}</p>
-        <div className="likeContainer">
+    <PostDiv >
+      <PostTopDiv>
+      <PostQuestionPara>{props.text}</PostQuestionPara>
+        <LikeContainer>
           {renderVoteButton()}
-          <p className="voteP" data-testid="num-of-votes">
+          <p style={{margin: 'auto', position: 'relative'}} data-testid="num-of-votes">
             {props.votes}
           </p>
-        </div>
-      </div>
-      <p className="askedBy">Asked By: {props.submitter}</p>
+        </LikeContainer>
+    </PostTopDiv>
+      <p style={{marginRight: 'auto'}}>Asked By: {props.submitter}</p>
       <p>Posted: {formatTime(props.timePosted)}</p>
-      <div className="answerDiv">
+      <AnswerDiv>
         {props.answer ? (
           <Button onClick={() => toggleAnswer()}>{answerButtonText()}</Button>
         ) : (
           ""
         )}
-        <div className="break"></div>
+        <div style={{flexBasis: '100%', height:0}}></div>
         {renderReply()}
-      </div>
-    </div>
+      </AnswerDiv>
+      </PostDiv>
   );
 };
 
