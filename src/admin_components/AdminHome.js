@@ -154,23 +154,21 @@ export default class AdminHome extends Component {
     }
   }
 
-  updateThemeForInput(questionList, newTheme, questionId) {
+  updatePost = (questionList, attribute, newTheme, questionId) => {
     let data = [...this.state[questionList]];
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
       if (questionId === item["id"]) {
-        item["theme"] = newTheme;
+        item[attribute] = newTheme;
         data[i] = item;
         this.setState({
           [questionList]: data,
         });
       }
     }
-  }
-
-  updateTheme = (questionList, newTheme, questionId) => {
-    this.updateThemeForInput(questionList, newTheme, questionId);
   };
+
+
   showSuccessfulToast() {
     toast.success("New Theme Added", {
       position: "top-right",
@@ -243,7 +241,7 @@ export default class AdminHome extends Component {
                           votes={item.votes}
                           theme={item.theme}
                           questionList={"inputData"}
-                          updateTheme={this.updateTheme}
+                          updatePost={this.updatePost}
                           answer={item.answer}
                           poster={item.poster}
                         />
@@ -272,7 +270,7 @@ export default class AdminHome extends Component {
                           votes={item.votes}
                           theme={item.theme}
                           questionList={"selected"}
-                          updateTheme={this.updateTheme}
+                          updatePost={this.updatePost}
                           answer={item.answer}
                           poster={item.poster}
                         />

@@ -43,7 +43,7 @@ export default class AdminPost extends React.Component {
       theme: evt,
     });
 
-    this.props.updateTheme(this.props.questionList, evt, this.props.dragId);
+    this.props.updatePost(this.props.questionList, 'theme', evt, this.props.dragId);
   }
 
   switchModal() {
@@ -80,6 +80,7 @@ renderReply() {
     this.setState({
       answer: answer,
     });
+    this.props.updatePost(this.props.questionList, 'answer', answer, this.props.dragId);
   }
 
   render() {
