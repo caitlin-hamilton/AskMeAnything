@@ -72,8 +72,8 @@ export default class AdminHome extends Component {
   }
 
   id2List = {
-    droppable: "inputData",
-    droppable2: "selected",
+    submissions: "inputData",
+    meetingQuestions: "selected",
   };
 
   getList = (id) => this.state[this.id2List[id]];
@@ -92,11 +92,11 @@ export default class AdminHome extends Component {
         destination.index
       );
 
-      if (source.droppableId === "droppable2") {
+      if (source.droppableId === "meetingQuestions") {
         this.setState({
           selected: items,
         });
-      } else if (source.droppableId === "droppable") {
+      } else if (source.droppableId === "submissions") {
         this.setState({
           inputData: items,
         });
@@ -110,8 +110,8 @@ export default class AdminHome extends Component {
       );
 
       this.setState({
-        inputData: result.droppable,
-        selected: result.droppable2,
+        inputData: result.submissions,
+        selected: result.meetingQuestions,
       });
     }
   };
@@ -223,7 +223,7 @@ export default class AdminHome extends Component {
           <div style={{display: 'flex', width: '100%'}}>
             <DragDropContext onDragEnd={this.onDragEnd}>
               <QuestionContainer>
-                <Droppable droppableId="droppable">
+                <Droppable droppableId="submissions">
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -252,7 +252,7 @@ export default class AdminHome extends Component {
                 </Droppable>
               </QuestionContainer>
               <QuestionContainer>
-                <Droppable droppableId="droppable2">
+                <Droppable droppableId="meetingQuestions">
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
