@@ -43,25 +43,19 @@ export default class AdminHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputData: [],
-      selected: [],
+      submissions: [],
+      meetingOrder: [],
       themes: [],
       isModalOpen: false,
       sortLogic: {
-        inputData: {
-          votes: "asc",
+          votes: false,
           timePosted: false,
-        },
-        selected: {
-          votes: "asc",
-          timePosted: false,
-        },
       },
     };
   }
   componentDidMount() {
     this.setState({
-      inputData: this.props.getTableData(),
+      submissions: this.props.getTableData(),
       themes: themes,
     });
   }
@@ -73,8 +67,8 @@ export default class AdminHome extends Component {
   }
 
   id2List = {
-    submissions: "inputData",
-    meetingQuestions: "selected",
+    submissions: "submissions",
+    meetingOrder: "meetingOrder",
   };
 
   getList = (id) => this.state[this.id2List[id]];
@@ -93,13 +87,13 @@ export default class AdminHome extends Component {
         destination.index
       );
 
-      if (source.droppableId === "meetingQuestions") {
+      if (source.droppableId === "meetingOrder") {
         this.setState({
           selected: items,
         });
       } else if (source.droppableId === "submissions") {
         this.setState({
-          inputData: items,
+          submissions: items,
         });
       }
     } else {
@@ -111,47 +105,48 @@ export default class AdminHome extends Component {
       );
 
       this.setState({
-        inputData: result.submissions,
-        selected: result.meetingQuestions,
+        submissions: result.submissions,
+        meetingOrder: result.meetingOrder,
       });
     }
   };
 
-  updateSortLogic = (questionList, attribute, direction) => {
+  updateSortLogic = (attribute, direction) => {
     let localSortLogic = { ...this.state.sortLogic };
-    Object.keys(localSortLogic[questionList]).forEach(
-      (v) => (localSortLogic[questionList][v] = false)
+    Object.keys(localSortLogic).forEach(
+      (v) => (localSortLogic[v] = false)
     );
-    localSortLogic[questionList][attribute] = direction;
+    localSortLogic[attribute] = direction;
     return localSortLogic;
   };
-  sortAscending = (questionList, attribute) => {
+
+  sortAscending = (attribute) => {
     let data = []
-      .concat(this.state[questionList])
+      .concat(this.state.submissions)
       .sort((a, b) => b[attribute] - a[attribute]);
     this.setState({
-      [questionList]: data,
-      sortLogic: this.updateSortLogic(questionList, attribute, "asc"),
+      submissions: data,
+      sortLogic: this.updateSortLogic(attribute, "asc"),
     });
   };
-  sortDescending = (questionList, attribute) => {
+  sortDescending = (attribute) => {
     let data = []
-      .concat(this.state[questionList])
+      .concat(this.state.submissions)
       .sort((a, b) => a[attribute] - b[attribute]);
     this.setState({
-      [questionList]: data,
-      sortLogic: this.updateSortLogic(questionList, attribute, "desc"),
+      submissions: data,
+      sortLogic: this.updateSortLogic(attribute, "desc"),
     });
   };
 
-  sortByAttribute(questionList, attribute) {
+  sortByAttribute(attribute) {
     if (
-      !this.state.sortLogic[questionList][attribute] ||
-      this.state.sortLogic[questionList][attribute] === "desc"
+      !this.state.sortLogic[attribute] ||
+      this.state.sortLogic[attribute] === "desc"
     ) {
-      this.sortAscending(questionList, attribute);
-    } else if (this.state.sortLogic[questionList][attribute] === "asc") {
-      this.sortDescending(questionList, attribute);
+      this.sortAscending(attribute);
+    } else if (this.state.sortLogic[attribute] === "asc") {
+      this.sortDescending( attribute);
     }
   }
 
@@ -198,6 +193,18 @@ export default class AdminHome extends Component {
     toast();
   }  
 
+  renderArrowDirection(attribute){
+    if(this.state.sortLogic[attribute] === 'asc'){
+      return(<AiOutlineArrowDown />)
+    }
+    else if(this.state.sortLogic[attribute] === 'desc') {
+      return(<AiOutlineArrowUp />)
+    }
+    else {
+      return
+    }
+  }
+
   render() {
     return (
       <div>
@@ -210,19 +217,20 @@ export default class AdminHome extends Component {
           <Button
             className="adminButton"
             onClick={() => {
-              this.sortByAttribute("inputData", "votes");
+              this.sortByAttribute("votes");
             }}
           >
-            Sort Votes
-            
+            Popular
+            {this.renderArrowDirection('votes')}
           </Button>
           <Button
             className="adminButton"
             onClick={() => {
-              this.sortByAttribute("inputData", "timePosted");
+              this.sortByAttribute("timePosted");
             }}
           >
-            Sort By Date
+            Most Recent 
+            {this.renderArrowDirection('timePosted')}
           </Button>
           <Button className="adminButton" onClick={() => this.switchModal()}>
             Edit Themes
@@ -246,7 +254,7 @@ export default class AdminHome extends Component {
                       ref={provided.innerRef}
                       style={getListStyle(snapshot.isDraggingOver)}
                     >
-                      {this.state.inputData.map((item, index) => (
+                      {this.state.submissions.map((item, index) => (
                         <AdminPost
                           provided={provided}
                           snapshot={snapshot}
@@ -257,7 +265,7 @@ export default class AdminHome extends Component {
                           timePosted={item.timePosted}
                           votes={item.votes}
                           theme={item.theme}
-                          questionList={"inputData"}
+                          questionList={"questions"}
                           updatePost={this.updatePost}
                           answer={item.answer}
                           poster={item.poster}
@@ -269,13 +277,13 @@ export default class AdminHome extends Component {
                 </Droppable>
               </QuestionContainer>
               <QuestionContainer>
-                <Droppable droppableId="meetingQuestions">
+                <Droppable droppableId="meetingOrder">
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
                       style={getListStyle(snapshot.isDraggingOver)}
                     >
-                      {this.state.selected.map((item, index) => (
+                      {this.state.meetingOrder.map((item, index) => (
                         <AdminPost
                           provided={provided}
                           snapshot={snapshot}

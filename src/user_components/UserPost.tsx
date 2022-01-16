@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 import Button from "@material-ui/core/Button";
 import formatTime from "../utils/formatTime";
 import {PostDiv, PostTopDiv, PostQuestionPara, LikeContainer, AnswerDiv} from './UserComponents.styled'
+import {AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
 interface Props {
   text: string;
@@ -54,9 +55,9 @@ const UserPost = (props: Props) => {
 
   function answerButtonText() {
     if (showAnswer) {
-      return "Hide Answer";
+      return <p>{<AiFillCaretUp/>} Hide Answer</p>;
     } else {
-      return "Show Answer";
+      return <p>{<AiFillCaretDown/>} Show Answer</p>;
     }
   }
 

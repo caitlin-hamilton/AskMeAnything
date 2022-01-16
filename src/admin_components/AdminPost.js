@@ -7,7 +7,7 @@ import AdminQuestionModal from "./AdminQuestionModal";
 import { MdAddCircleOutline } from "react-icons/md";
 import formatTime from "../utils/formatTime";
 import {AnswerContainer, AdminPostContainer, TextContainer} from './AdminComponents.styled'
-import { grey } from "@material-ui/core/colors";
+import {AiFillCaretDown, AiFillCaretUp } from "react-icons/ai";
 
 const grid = 8;
 
@@ -65,9 +65,9 @@ renderReply() {
       <AnswerContainer>
         <Button onClick={() => this.switchShowAnswer()}>
           {this.state.showAnswer ? (
-              <p>Hide Answer</p>
+              <p><AiFillCaretUp /> Hide Answer</p>
           ) : (
-              <p>Show Answer</p>
+              <p> {<AiFillCaretDown />} Show Answer</p>
           )}
         </Button>
         {this.state.showAnswer ? <p style={{backgroundColor: '#BFBFBF'}}>{this.state.answer}</p> : ""}
