@@ -265,7 +265,7 @@ export default class AdminHome extends Component {
                           timePosted={item.timePosted}
                           votes={item.votes}
                           theme={item.theme}
-                          questionList={"questions"}
+                          questionList={"submissions"}
                           updatePost={this.updatePost}
                           answer={item.answer}
                           poster={item.poster}
@@ -294,7 +294,7 @@ export default class AdminHome extends Component {
                           timePosted={item.timePosted}
                           votes={item.votes}
                           theme={item.theme}
-                          questionList={"selected"}
+                          questionList={"meetingOrder"}
                           updatePost={this.updatePost}
                           answer={item.answer}
                           poster={item.poster}
