@@ -81,7 +81,7 @@ export default function QuestionModal(props: Props) {
               defaultChecked={true}
             />
             <label htmlFor="isAnonymous"> Ask Anonymously</label>
-            <input type="submit" value="Post Question" />
+            <input type="submit" value="Post Question" style={{margin: "5px"}}/>
           </div>
         </form>
       </Modal.Body>

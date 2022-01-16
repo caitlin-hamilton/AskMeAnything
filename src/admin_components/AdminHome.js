@@ -7,6 +7,7 @@ import themes from "./Themes";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {QuestionHeading, QuestionContainer} from './AdminComponents.styled'
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import '../App.css'
 
 const reorder = (list, startIndex, endIndex) => {
@@ -169,9 +170,9 @@ export default class AdminHome extends Component {
   };
 
 
-  showSuccessfulToast() {
+  showNewThemeToast() {
     toast.success("New Theme Added", {
-      position: "top-right",
+      position: "top-center",
       autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: true,
@@ -182,6 +183,20 @@ export default class AdminHome extends Component {
 
     toast();
   }
+
+  showSuccessfulDeleteToast() {
+    toast.error("Theme Deleted", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+    toast();
+  }  
 
   render() {
     return (
@@ -198,7 +213,8 @@ export default class AdminHome extends Component {
               this.sortByAttribute("inputData", "votes");
             }}
           >
-            Sort By Votes
+            Sort Votes
+            
           </Button>
           <Button
             className="adminButton"
@@ -215,10 +231,11 @@ export default class AdminHome extends Component {
             isModalOpen={this.state.isModalOpen}
             switchModal={() => this.switchModal()}
             themes={themes}
-            showSuccessfulToast={() => this.showSuccessfulToast()}
+            showNewThemeToast={() => this.showNewThemeToast()}
+            showSuccessfulDeleteToast={() => this.showSuccessfulDeleteToast()}
           />
-          <Button className="adminButton">Save Order</Button>
-          <Button className="adminButton">Start Meeting</Button>
+          <Button className="adminButton float-right">Save Order</Button>
+          <Button className="adminButton float-right">Start Meeting</Button>
         </div>
           <div style={{display: 'flex', width: '100%'}}>
             <DragDropContext onDragEnd={this.onDragEnd}>

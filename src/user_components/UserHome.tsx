@@ -140,6 +140,7 @@ const UserHome = (props: Props) => {
       <div style={{display: 'flex', justifyContent: 'center'}}>
         <textarea
           onClick={() => switchModal()}
+          readOnly
           placeholder="Ask us anything..."
           style={{width: '100%', height:'100px'}}
         />

@@ -12,16 +12,18 @@ export default function ThemeModal(props) {
   }
 
   function submit(event) {
+    props.themes.push(theme);
     props.switchModal();
     event.preventDefault();
-    props.themes.push(theme);
-    props.showSuccessfulToast();
+    props.showNewThemeToast();
   }
 
-  function deleteTheme(e) {
-    const index = themes.indexOf(e.target.value);
+  function deleteTheme(themeName) {
+    const index = themes.indexOf(themeName);
     if (index > -1) {
       themes.splice(index, 1);
+      props.switchModal();
+      props.showSuccessfulDeleteToast()
     }
   }
 
@@ -47,7 +49,7 @@ export default function ThemeModal(props) {
               variant="contained"
               startIcon={<DeleteIcon />}
               value={item}
-              onClick={(e) => deleteTheme(e, "value")}
+              onClick={() => deleteTheme(item)}
             >
               {item}
             </Button>

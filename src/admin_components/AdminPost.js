@@ -7,6 +7,7 @@ import AdminQuestionModal from "./AdminQuestionModal";
 import { MdAddCircleOutline } from "react-icons/md";
 import formatTime from "../utils/formatTime";
 import {AnswerContainer, AdminPostContainer, TextContainer} from './AdminComponents.styled'
+import { grey } from "@material-ui/core/colors";
 
 const grid = 8;
 
@@ -69,7 +70,7 @@ renderReply() {
               <p>Show Answer</p>
           )}
         </Button>
-        {this.state.showAnswer ? <p>{this.state.answer}</p> : ""}
+        {this.state.showAnswer ? <p style={{backgroundColor: '#BFBFBF'}}>{this.state.answer}</p> : ""}
       </AnswerContainer>
     );
   }

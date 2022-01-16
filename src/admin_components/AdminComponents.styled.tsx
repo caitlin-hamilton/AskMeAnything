@@ -4,6 +4,7 @@ export const QuestionHeading = styled.h1`
 width: 50%;
 height: 100%;
 display: flex;
+justify-content: center;
 `
 
 export const QuestionContainer = styled.div`

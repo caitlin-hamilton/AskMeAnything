@@ -19,15 +19,10 @@ interface Props {
 const UserPost = (props: Props) => {
   const [showAnswer, setShowAnswer] = useState(false);
 
-  useEffect(() => {
-  }, [props.hasUserVoted]);
-
-
   function renderVoteButton() {
-    if (props.hasUserVoted === true) {
+    if (props.hasUserVoted) {
       return (
         <FaThumbsUp
-          data-testid="btn-decr"
           size="20px"
           className="voteIcon"
           onClick={() => props.decrementVote(props.id)}
@@ -36,7 +31,6 @@ const UserPost = (props: Props) => {
     } else {
       return (
         <FaRegThumbsUp
-          data-testid="btn-incr"
           size="20px"
           className="voteIcon"
           onClick={() => props.incrementVote(props.id)}
@@ -54,9 +48,7 @@ const UserPost = (props: Props) => {
       return <p>{props.answer}</p>;
     } else if (!props.answer)
       return (
-        <div style={{fontWeight:'bold'}}>
-          <p>No Answer yet..</p>
-        </div>
+          <p style={{fontWeight:'bold'}}>No Answer yet..</p>
       );
   }
 
@@ -90,7 +82,7 @@ const UserPost = (props: Props) => {
         <div style={{flexBasis: '100%', height:0}}></div>
         {renderReply()}
       </AnswerDiv>
-      </PostDiv>
+    </PostDiv>
   );
 };
 
