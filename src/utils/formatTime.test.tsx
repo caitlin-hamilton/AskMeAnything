@@ -1,11 +1,8 @@
 import formatTime from "../utils/formatTime";
-import Enzyme, { shallow } from "enzyme";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-
-Enzyme.configure({ adapter: new Adapter() });
-let result:string;
 
 describe("Format Time Test Over Different Hour", () => {
+  let result:string;
+
     beforeAll(() => {
         jest.useFakeTimers("modern");
         jest.setSystemTime(new Date(1641304800000)) //Current time is 14:00
@@ -38,6 +35,8 @@ describe("Format Time Test Over Different Hour", () => {
 })
 
 describe("Format Time Test Over Same Hour", () => {
+  let result:string;
+  
     beforeAll(() => {
         jest.useFakeTimers("modern");
         jest.setSystemTime(new Date(1641304920000)); //Current time is 14:02

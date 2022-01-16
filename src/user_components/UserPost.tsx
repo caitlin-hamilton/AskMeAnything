@@ -24,6 +24,7 @@ const UserPost = (props: Props) => {
     if (props.hasUserVoted) {
       return (
         <FaThumbsUp
+          role="Voted"
           size="20px"
           className="voteIcon"
           onClick={() => props.decrementVote(props.id)}
@@ -32,6 +33,7 @@ const UserPost = (props: Props) => {
     } else {
       return (
         <FaRegThumbsUp
+          role="notVoted"
           size="20px"
           className="voteIcon"
           onClick={() => props.incrementVote(props.id)}
@@ -67,7 +69,7 @@ const UserPost = (props: Props) => {
       <PostQuestionPara>{props.text}</PostQuestionPara>
         <LikeContainer>
           {renderVoteButton()}
-          <p style={{margin: 'auto', position: 'relative'}} data-testid="num-of-votes">
+          <p style={{margin: 'auto', position: 'relative'}} data-testid="numVotes">
             {props.votes}
           </p>
         </LikeContainer>
@@ -76,7 +78,7 @@ const UserPost = (props: Props) => {
       <p>Posted: {formatTime(props.timePosted)}</p>
       <AnswerDiv>
         {props.answer ? (
-          <Button onClick={() => toggleAnswer()}>{answerButtonText()}</Button>
+          <Button data-testid="answerButton" onClick={() => toggleAnswer()}>{answerButtonText()}</Button>
         ) : (
           ""
         )}

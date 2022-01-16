@@ -28,13 +28,12 @@ export default function QuestionModal(props: Props) {
   }
 
   function postNewQuestion(){
-    const today: Date = new Date();
     const newQuestion: Question = {
-      id: props.numberOfQuestions.toString() + 1, //obviously this is not ideal but fine for demo purposes
+      id: (props.numberOfQuestions + 1).toString(), //obviously this is not ideal but fine for demo purposes
       text: questionText,
       poster: user,
       votes: 0,
-      timePosted: Number(today),
+      timePosted: Number(new Date()),
       theme: "",
       answer: "",
     };
@@ -77,11 +76,12 @@ export default function QuestionModal(props: Props) {
             <input
               id="isAnonymous"
               type="checkbox"
+              data-testid="checkbox"
               onChange={(e) => handleUser(e)}
               defaultChecked={true}
             />
             <label htmlFor="isAnonymous"> Ask Anonymously</label>
-            <input type="submit" value="Post Question" style={{margin: "5px"}}/>
+            <input data-testid="submit" type="submit" value="Post Question" style={{margin: "5px"}}/>
           </div>
         </form>
       </Modal.Body>

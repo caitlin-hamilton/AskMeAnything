@@ -6,6 +6,7 @@ import QuestionModal from "./QuestionModal";
 import Question from "../Question";
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import {UserPostContainer, Container} from './UserComponents.styled'
+import sortArrayQuestion from '../utils/sortArrayQuestion'
 
 interface Props {
   getQuestions(): Array<Question>;
@@ -38,37 +39,14 @@ const UserHome = (props: Props) => {
     data: Array<Question>,
     attribute: keyof Question
   ) {
-    let sortedData = [...data];
-    if (direction === "desc") {
-      sortedData.sort((a, b) => {
-        if (a[attribute] >= b[attribute]) {
-          return 1;
-        } else if (a[attribute] < b[attribute]) {
-          return -1;
-        } else {
-          return 0;
-        }
-      });
-      updateSortLogic(attribute, "desc");
-    } else {
-      sortedData.sort((a, b) => {
-        if (a[attribute] < b[attribute]) {
-          return 1;
-        } else if (a[attribute] >= b[attribute]) {
-          return -1;
-        }
-        else {
-          return 0;
-        }
-      });
-      updateSortLogic(attribute, "asc");
-    }
+    let sortedData = sortArrayQuestion([...data], direction, attribute)
+    updateSortLogic(attribute, direction);
     setQuestions(sortedData);
   }
 
-  function updateSortLogic(attribute: keyof Question, direction: string) {
-    let updatedSortLogic = { ...sortLogic };
-    let objKeys = Object.keys(updatedSortLogic) as Array<keyof SortLogicI>;
+  function updateSortLogic(attribute: keyof Question, direction: string | boolean) {
+    const updatedSortLogic = { ...sortLogic };
+    const objKeys = Object.keys(updatedSortLogic) as Array<keyof SortLogicI>;
 
     objKeys.forEach((key) => {
       if (key === attribute) {
@@ -80,13 +58,13 @@ const UserHome = (props: Props) => {
     setSortLogic(updatedSortLogic);
   }
   function incrementVote(postId: string) {
-    let newQuestionData = questions.map((post) => {
+    const newQuestionData = questions.map((post) => {
       if (post.id === postId) {
         post.votes = post.votes + 1;
       }
       return post;
     });
-    let newUserData: string[] = [...userData];
+    const newUserData: string[] = [...userData];
     newUserData.push(postId);
 
     setUserData(newUserData);
@@ -94,13 +72,13 @@ const UserHome = (props: Props) => {
   }
 
   function decrementVote(postId: string) {
-    let newQuestionData = questions.map((post) => {
+    const newQuestionData = questions.map((post) => {
       if (post.id === postId) {
         post.votes = post.votes - 1;
       }
       return post;
     });
-    let newUserData: string[] = userData.filter((element) => {
+    const newUserData: string[] = userData.filter((element) => {
       return element !== postId;
     });
 
@@ -108,8 +86,7 @@ const UserHome = (props: Props) => {
     setQuestions(newQuestionData);
   }
   function hasUserVoted(postId: string) {
-    let result: boolean = userData.includes(postId);
-    return result;
+    return userData.includes(postId);;
   }
   function switchModal() {
     isModalOpen ? setIsModalOpen(false) : setIsModalOpen(true);

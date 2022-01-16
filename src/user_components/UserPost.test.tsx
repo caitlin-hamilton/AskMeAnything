@@ -1,17 +1,10 @@
-import React from "react";
 import UserPost from "./UserPost";
-import Enzyme, { shallow } from "enzyme";
-import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import Button from "@material-ui/core/Button";
 import { render, screen } from "@testing-library/react";
-
-//enzyme tests
-
-Enzyme.configure({ adapter: new Adapter() });
+import userEvent from '@testing-library/user-event'
 
 describe("PostTestComponent", () => {
   test("show answer on click", () => {
-    const wrapper = shallow(
+    render(
       <UserPost
         text={"Question"}
         answer={"Answer text"}
@@ -22,12 +15,12 @@ describe("PostTestComponent", () => {
         timePosted={1641225006000}
         incrementVote={() => {}}
         decrementVote={() => {}}
-      />
+      ></UserPost>
     );
-    expect(wrapper.find(".answerDiv p").length).toBe(0);
-    expect(wrapper.find(Button).text()).toBe("Show Answer");
-    wrapper.find(Button).simulate("click");
-    expect(wrapper.find(".answerDiv p").length).toBe(1);
-    expect(wrapper.find(Button).text()).toBe("Hide Answer");
-  });
+    expect(screen.queryByText('Answer text')).toBeNull()
+    userEvent.click(screen.getByTestId("answerButton"));
+    expect(screen.getByText("Answer text")).toBeInTheDocument()
+  })
+
+
 })

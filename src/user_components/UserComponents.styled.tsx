@@ -32,7 +32,7 @@ width: 90%;
 font-size: 120%;
 `
 
-export const LikeContainer = styled.p` 
+export const LikeContainer = styled.div` 
   display: flex;
   flex-direction: row;
   background-color: #e0e0e0;
@@ -41,7 +41,7 @@ export const LikeContainer = styled.p`
   width: 10%;
 `
 
-export const AnswerDiv = styled.p `
+export const AnswerDiv = styled.div `
   flex-direction: row;
   width: 100%;
   align-self: flex-end;
